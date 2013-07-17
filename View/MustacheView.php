@@ -11,7 +11,7 @@
  */
 
 App::uses('View', 'View');
-App::uses('View', 'MustachePartialsLoader');
+App::uses('View', 'MustacheCake.MustachePartialsLoader');
 
 /**
  * Mustache view class.
