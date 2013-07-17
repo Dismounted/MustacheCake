@@ -11,6 +11,8 @@
  */
 
 App::uses('View', 'View');
+App::import('Vendor', 'MustacheAutoloader', array('file' => 'Mustache' . DS . 'src' . DS 'Mustache' . DS . 'Autoloader.php'));
+Mustache_Autoloader::register();
 
 /**
  * Mustache view class.
