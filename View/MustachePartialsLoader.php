@@ -51,7 +51,7 @@ class MustachePartialsLoader implements Mustache_Loader {
 		$file = $this->_view->getPartialFileName();
 
 		if ($file === false) {
-			throw new MissingViewException(array('file' => $name));
+			throw new MissingViewException(array('file' => $name . $this->_view->ext));
 		}
 
 		return file_get_contents($file);
