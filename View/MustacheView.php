@@ -49,7 +49,7 @@ class MustacheView extends View {
 	 * @param Controller $controller A controller object to pull View::_passedVars from.
 	 */
 	public function __construct(Controller $controller = null) {
-		parent::__construct();
+		parent::__construct($controller);
 
 		if (class_exists('Mustache_Autoloader', false) === false) {
 			App::import('Vendor', 'MustacheCake.Mustache_Autoloader', array('file' => 'Mustache' . DS . 'src' . DS . 'Mustache' . DS . 'Autoloader.php'));
