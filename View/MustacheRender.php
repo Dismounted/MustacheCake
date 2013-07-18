@@ -42,7 +42,7 @@ abstract class MustacheRender {
 			$this->{$name} = $data;
 		}
 
-		foreach ($view->blocks as $name) {
+		foreach ($view->blocks() as $name) {
 			$this->{$name} = $view->fetch($name);
 		}
 	}
