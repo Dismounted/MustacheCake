@@ -180,4 +180,17 @@ class MustacheView extends View {
 		return '';
 	}
 
+	/**
+	 * Get the extensions that view files can use. Override to remove ".ctp".
+	 *
+	 * @return array Array of extensions view files use.
+	 */
+	protected function _getExtensions() {
+		$exts = array($this->ext);
+		if ($this->ext !== '.mustache') {
+			$exts[] = '.mustache';
+		}
+		return $exts;
+	}
+
 }
