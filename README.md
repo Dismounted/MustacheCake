@@ -11,16 +11,22 @@ Requirements
 Installation
 ------------
 
-* Clone this repo into `app/Plugin/MustacheCake`.
-	`git submodule add https://github.com/Dismounted/MustacheCake.git app/Plugin/MustacheCake`
-* Initialise all submodules.
-	`git submodule update --init --recursive`
-* Ensure the plugin is loaded in `app/Config/bootstrap.php` by calling `CakePlugin::load('MustacheCake');`
-* Specify the Mustache view class in your controller (either individually or through AppController).
+1. Clone this repo into `app/Plugin/MustacheCake`.
+
+	```
+	git submodule add https://github.com/Dismounted/MustacheCake.git app/Plugin/MustacheCake
+	git submodule update --init --recursive
+	```
+
+2. Ensure the plugin is loaded in `app/Config/bootstrap.php` by calling `CakePlugin::load('MustacheCake');`.
+
+3. Specify the Mustache view class in your controller (either individually or through AppController).
+
 	```php
 	class AppController extends Controller {
 		public $viewClass = 'MustacheCake.Mustache';
 		public $ext = '.mustache';
 	}
 	```
-* Start using Mustache!
+
+4. Start using Mustache!
