@@ -51,7 +51,7 @@ class MustacheView extends View {
 	public function __construct(Controller $controller = null) {
 		parent::__construct();
 
-		if (class_exists('Mustache_Autoloader') === false) {
+		if (class_exists('Mustache_Autoloader', false) === false) {
 			App::import('Vendor', 'MustacheAutoloader', array('file' => 'Mustache' . DS . 'src' . DS 'Mustache' . DS . 'Autoloader.php'));
 			Mustache_Autoloader::register();
 		}
