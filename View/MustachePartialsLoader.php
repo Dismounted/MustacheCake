@@ -11,7 +11,7 @@
  */
 
 if (class_exists('Mustache_Autoloader', false) === false) {
-	App::import('MustacheCake.Vendor', 'Mustache_Autoloader', array('file' => 'Mustache' . DS . 'src' . DS . 'Mustache' . DS . 'Autoloader.php'));
+	App::import('Vendor', 'MustacheCake.Mustache_Autoloader', array('file' => 'Mustache' . DS . 'src' . DS . 'Mustache' . DS . 'Autoloader.php'));
 	Mustache_Autoloader::register();
 }
 
