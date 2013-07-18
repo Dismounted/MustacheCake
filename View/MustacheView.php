@@ -103,13 +103,12 @@ class MustacheView extends View {
 			$viewFile
 		);
 
-		if (file_exists($renderClassPath) === false) {
+		$renderClassName = $this->_getRenderClassName($renderClassPath);
+		if (empty($renderClassName) === true) {
 			return $dataForView;
 		}
 
 		require_once($renderClassPath);
-		$renderClassName = $this->_getRenderClassName($renderClassPath);
-
 		return new $renderClassName($this, $dataForView);
 	}
 
@@ -117,12 +116,16 @@ class MustacheView extends View {
 	 * Looks through a file to find the name of the first declared class.
 	 *
 	 * @param string $file Filename of the class.
-	 * @return string Class name.
+	 * @return string Class name, empty if none found.
 	 */
 	protected function _getRenderClassName($file) {
 		$fp = fopen($file, 'r');
 		$class = $buffer = '';
 		$i = 0;
+
+		if ($fp === false) {
+			return '';
+		}
 
 		while (!$class) {
 			if (feof($fp)) {
