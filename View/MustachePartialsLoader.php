@@ -44,7 +44,8 @@ class MustachePartialsLoader implements Mustache_Loader {
 	 * Load a Template by name.
 	 *
 	 * @param string $name
-	 * @return string Mustache Template source
+	 * @return string Mustache Template source.
+	 * @throws MissingViewException when a partial is not found.
 	 */
 	public function load($name) {
 		$file = $this->_view->getPartialFileName();
