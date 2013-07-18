@@ -1,15 +1,12 @@
-MustacheCake
-============
+# MustacheCake #
 
 A Mustache implementation for CakePHP.
 
-Requirements
-------------
+## Requirements ##
 
 * CakePHP 2.3 (May work on older versions of 2.x, not tested.)
 
-Installation
-------------
+## Installation ##
 
 1. Clone this repo into `app/Plugin/MustacheCake`.
 
@@ -33,8 +30,7 @@ Installation
 
 4. Start using Mustache!
 
-Usage
-------------
+## Usage ##
 
 For a reference of Mustache syntax, see the Mustache manual: [http://mustache.github.io/mustache.5.html](http://mustache.github.io/mustache.5.html).
 
@@ -42,13 +38,13 @@ Layouts and views are processed via Cake conventions; just create templates in t
 
 So for the `bar` action in `FooController`, create `bar.mustache` in `app/View/Foo`.
 
-Usage - Partials
+### Usage - Partials ###
 
 Partials are loaded from `app/View/Elements` automatically. Calling `{{> foo}}` will include `app/View/Elements/foo.mustache`. Missing partials are simply returned as empty strings, no exceptions or errors will be recorded.
 
 It is not recommended to call `View::element()` while using MustacheCake as the partials syntax should cover all your needs. However, it is not explicitly disallowed. Calling it will render the element as a separate template, so watch out for variable scope issues if you decide you need to call `View::element()`.
 
-Usage - Render Classes
+### Usage - Render Classes ###
 
 You can also create a file to accompany the template as a "render class". Place it in the same directory as the template with a `.php` extension (i.e. for `bar.mustache`, create `bar.php`).
 
@@ -60,8 +56,7 @@ A render class extending `MustacheRender` will also import any defined "view blo
 
 As you can see, render classes can become a very useful and powerful tool, allowing you to keep your templates "clean". However, it is not necessary to create a render class. If one does not exist, MustacheCake will simply use view variables set from the controller.
 
-Confused?
-------------
+## Confused? ##
 
 Sorry! I've tried to make it as straightforward as possible, by providing a light "glue" between CakePHP and Mustache. Once you get the hang of using MustacheCake, it should make a lot of sense.
 
