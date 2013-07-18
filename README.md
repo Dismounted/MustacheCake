@@ -38,13 +38,13 @@ Layouts and views are processed via Cake conventions; just create templates in t
 
 So for the `bar` action in `FooController`, create `bar.mustache` in `app/View/Foo`.
 
-### Usage - Partials ###
+### Partials ###
 
 Partials are loaded from `app/View/Elements` automatically. Calling `{{> foo}}` will include `app/View/Elements/foo.mustache`. Missing partials are simply returned as empty strings, no exceptions or errors will be recorded.
 
 It is not recommended to call `View::element()` while using MustacheCake as the partials syntax should cover all your needs. However, it is not explicitly disallowed. Calling it will render the element as a separate template, so watch out for variable scope issues if you decide you need to call `View::element()`.
 
-### Usage - Render Classes ###
+### Render Classes ###
 
 You can also create a file to accompany the template as a "render class". Place it in the same directory as the template with a `.php` extension (i.e. for `bar.mustache`, create `bar.php`).
 
