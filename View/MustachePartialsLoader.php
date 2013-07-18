@@ -41,17 +41,16 @@ class MustachePartialsLoader implements Mustache_Loader {
 	}
 
 	/**
-	 * Load a Template by name.
+	 * Load a Template by name. Returning empty string on failure matches Cake behaviour.
 	 *
 	 * @param string $name
 	 * @return string Mustache Template source.
-	 * @throws MissingViewException when a partial is not found.
 	 */
 	public function load($name) {
 		$file = $this->_view->getPartialFileName($name);
 
 		if ($file === false) {
-			throw new MissingViewException(array('file' => 'Elements' . DS . $name . $this->_view->ext));
+			return '';
 		}
 
 		return file_get_contents($file);
