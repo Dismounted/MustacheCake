@@ -57,6 +57,7 @@ class MustacheView extends View {
 		}
 
 		$this->mustache = new Mustache_Engine(array(
+			'cache' => $this->_getMustacheCachePath(),
 			'partials_loader' => new MustachePartialsLoader($this)
 		));
 	}
@@ -94,7 +95,7 @@ class MustacheView extends View {
 	 *
 	 * @param string $viewFn Filename of the view.
 	 * @param array $dataForView Data to include in rendered view.
-	 * @return array|MustacheRender Return an object, or hand back untouched data.
+	 * @return mixed Return a MustacheRender object, or hand back untouched array.
 	 */
 	protected function _getRenderData($viewFile, $dataForView) {
 		$renderClassPath = preg_replace(
@@ -162,6 +163,21 @@ class MustacheView extends View {
 	 */
 	public function getPartialFileName($name) {
 		return $this->_getElementFilename($name);
+	}
+
+	/**
+	 * If Cake is using FileEngine, let's hop on!
+	 *
+	 * @return string The cache path, empty if not applicable.
+	 */
+	protected function _getMustacheCachePath() {
+		$settings = Cache::settings();
+
+		if ($settings['engine'] == 'File') {
+			return $settings['path'] . DS . 'mustache';
+		}
+
+		return '';
 	}
 
 }
