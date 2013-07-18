@@ -48,7 +48,7 @@ class MustachePartialsLoader implements Mustache_Loader {
 	 * @throws MissingViewException when a partial is not found.
 	 */
 	public function load($name) {
-		$file = $this->_view->getPartialFileName();
+		$file = $this->_view->getPartialFileName($name);
 
 		if ($file === false) {
 			throw new MissingViewException(array('file' => $name . $this->_view->ext));
