@@ -120,13 +120,13 @@ class MustacheView extends View {
 	 * @return string Class name, empty if none found.
 	 */
 	protected function _getRenderClassName($file) {
+		if (file_exists($file) === false) {
+			return '';
+		}
+
 		$fp = fopen($file, 'r');
 		$class = $buffer = '';
 		$i = 0;
-
-		if ($fp === false) {
-			return '';
-		}
 
 		while (!$class) {
 			if (feof($fp)) {
