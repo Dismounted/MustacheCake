@@ -24,8 +24,10 @@ Installation
 
 	```php
 	class AppController extends Controller {
+		...
 		public $viewClass = 'MustacheCake.Mustache';
 		public $ext = '.mustache';
+		...
 	}
 	```
 
