@@ -23,7 +23,7 @@ App::uses('MustachePartialsLoader', 'MustacheCake.View');
 class MustacheView extends View {
 
 	/**
-	 * File extension. Overrides Cake default.
+	 * File extension. Overrides Cake default. Need to also override in controller!
 	 *
 	 * @var string
 	 */
