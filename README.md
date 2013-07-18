@@ -18,7 +18,7 @@ Installation
 	git submodule update --init --recursive
 	```
 
-2. Ensure the plugin is loaded in `app/Config/bootstrap.php` by calling `CakePlugin::load('MustacheCake');`.
+2. Load the plugin in `app/Config/bootstrap.php` by calling `CakePlugin::load('MustacheCake');`.
 
 3. Specify the Mustache view class in your controller (either individually or through AppController).
 
