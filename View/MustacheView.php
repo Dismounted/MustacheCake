@@ -113,7 +113,7 @@ class MustacheView extends View {
 	 */
 	protected function _getRenderData($viewFile, $dataForView) {
 		$renderClassPath = preg_replace(
-			'/' . preg_quote($this->_getViewExt()) . '$/i',
+			'/' . preg_quote($this->_getViewExt($viewFile)) . '$/i',
 			$this->extRenderClass,
 			$viewFile
 		);
