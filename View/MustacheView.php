@@ -91,7 +91,7 @@ class MustacheView extends View {
 	 * @return string File extension.
 	 */
 	protected function _getViewExt($viewFile) {
-		return pathinfo($viewFile, PATHINFO_EXTENSION);
+		return '.' . pathinfo($viewFile, PATHINFO_EXTENSION);
 	}
 
 	/**
