@@ -38,6 +38,8 @@ Layouts and views are processed via Cake conventions; just create templates in t
 
 So for the `bar` action in `FooController`, create `bar.mustache` in `app/View/Foo`.
 
+MustacheCake tries to be smart: any template with the extension `.ctp` will be rendered by the default Cake View class.
+
 ### Partials ###
 
 Partials are loaded from `app/View/Elements` automatically. Calling `{{> foo}}` will include `app/View/Elements/foo.mustache`. Missing partials are simply returned as empty strings, no exceptions or errors will be recorded.
