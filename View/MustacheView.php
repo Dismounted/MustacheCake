@@ -63,13 +63,17 @@ class MustacheView extends View {
 	}
 
 	/**
-	 * Override to evaluate template through Mustache.
+	 * Override to evaluate template through Mustache. Falls back on ".ctp" templates.
 	 *
 	 * @param string $viewFn Filename of the view.
 	 * @param array $dataForView Data to include in rendered view.
 	 * @return string Rendered output.
 	 */
 	protected function _evaluate($viewFile, $dataForView) {
+		if ($this->_getViewExt($viewFile) == '.ctp') {
+			return parent::_evaluate($viewFile, $dataForView);
+		}
+
 		$this->__viewFile = $viewFile;
 
 		$template = $this->_getTemplateAsString($viewFile);
@@ -78,6 +82,16 @@ class MustacheView extends View {
 
 		unset($this->__viewFile);
 		return $rendered;
+	}
+
+	/**
+	 * Grab the view's file extension.
+	 *
+	 * @param string $viewFn Filename of the view.
+	 * @return string File extension.
+	 */
+	protected function _getViewExt($viewFile) {
+		return pathinfo($viewFile, PATHINFO_EXTENSION);
 	}
 
 	/**
@@ -99,7 +113,7 @@ class MustacheView extends View {
 	 */
 	protected function _getRenderData($viewFile, $dataForView) {
 		$renderClassPath = preg_replace(
-			'/' . preg_quote($this->ext) . '$/i',
+			'/' . preg_quote($this->_getViewExt()) . '$/i',
 			$this->extRenderClass,
 			$viewFile
 		);
@@ -181,7 +195,7 @@ class MustacheView extends View {
 	}
 
 	/**
-	 * Get the extensions that view files can use. Override to remove ".ctp".
+	 * Get the extensions that view files can use. Override to add ".mustache" into the stack.
 	 *
 	 * @return array Array of extensions view files use.
 	 */
@@ -189,6 +203,9 @@ class MustacheView extends View {
 		$exts = array($this->ext);
 		if ($this->ext !== '.mustache') {
 			$exts[] = '.mustache';
+		}
+		if ($this->ext !== '.ctp') {
+			$exts[] = '.ctp';
 		}
 		return $exts;
 	}
