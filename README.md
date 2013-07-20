@@ -42,7 +42,7 @@ MustacheCake tries to be smart: any template with the extension `.ctp` will be r
 
 ### Partials ###
 
-Partials are loaded from `app/View/Elements` automatically. Calling `{{> foo}}` will include `app/View/Elements/foo.mustache`. Missing partials are simply returned as empty strings, no exceptions or errors will be recorded.
+Partials are loaded from `app/View/Elements` automatically. Calling `{{> foo }}` will include `app/View/Elements/foo.mustache`. Missing partials are simply returned as empty strings, no exceptions or errors will be recorded.
 
 It is not recommended to call `View::element()` while using MustacheCake as the partials syntax should cover all your needs. However, it is not explicitly disallowed. Calling it will render the element as a separate template, so watch out for variable scope issues if you decide you need to call `View::element()`.
 
@@ -52,7 +52,7 @@ You can also create a file to accompany the template as a "render class". Place 
 
 Inside the render class file, create a class that extends `MustacheRender`, ensuring to call `App::uses('MustacheRender', 'MustacheCake.View');` beforehand. The class can be named whatever you like, as long as it does not conflict with any other class's name.
 
-From the render class, you can create methods to run whatever logic you need. One common use case would be to call Cake helpers (through `$this->_view`). A call to `{{foo}}` in the template will attempt to call the `foo` method in the render class. If the method does not exist, the `foo` view variable will be returned instead.
+From the render class, you can create methods to run whatever logic you need. One common use case would be to call Cake helpers (through `$this->_view`). A call to `{{ foo }}` in the template will attempt to call the `foo` method in the render class. If the method does not exist, the `foo` view variable will be returned instead.
 
 A render class extending `MustacheRender` will also import any defined "view blocks" as view variables, overwriting view variables of the same name (if they exist). View blocks are not recommended to be used, but they are necessary to grab special Cake ones like `content`, `css`, and `script`.
 
