@@ -17,7 +17,7 @@ A Mustache implementation for CakePHP.
 
 2. Load the plugin in `app/Config/bootstrap.php` by calling `CakePlugin::load('MustacheCake');`.
 
-3. Specify the Mustache view class in your controller (either individually or through AppController).
+3. Specify the Mustache view class in your controller (either individually or through `AppController`).
 
 	```php
 	class AppController extends Controller {
@@ -38,7 +38,7 @@ Layouts and views are processed via Cake conventions; just create templates in t
 
 So for the `bar` action in `FooController`, create `bar.mustache` in `app/View/Foo`.
 
-MustacheCake tries to be smart: any template with the extension `.ctp` will be rendered by the default Cake View class.
+MustacheCake tries to be smart: any template with the extension `.ctp` will be rendered by the default Cake View class. This allows you to gradually migrate across to Mustache.
 
 ### Partials ###
 
