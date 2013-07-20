@@ -62,4 +62,4 @@ As you can see, render classes can become a very useful and powerful tool, allow
 
 Sorry! I've tried to make it as straightforward as possible, by providing a light "glue" between CakePHP and Mustache. Once you get the hang of using MustacheCake, it should make a lot of sense.
 
-Included in this repo are the default Cake layouts and views transposed to work with MustacheCake. Looking at these may make the usage scenarios clearer.
+Included in this repo are the default Cake layouts and views transposed to work with MustacheCake. Looking at these may make the usage scenarios clearer. They are located in `MustacheCake/View/Layouts` and `MustacheCake/View/Pages`.
