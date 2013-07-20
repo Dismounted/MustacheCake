@@ -1,0 +1,47 @@
+<h2>{{ mainHeading }}</h2>
+<p>
+	<a href="http://cakephp.org/changelogs/{{ version }}">{{ readChangelogText }}</a>
+</p>
+{{ checkSecurityKeys }}
+<p id="url-rewriting-warning" style="background-color:#e32; color:#fff;">
+	{{ urlRewritingText }}
+	1) <a target="_blank" href="http://book.cakephp.org/2.0/en/installation/url-rewriting.html" style="color:#fff;">Help me configure it</a>
+	2) <a target="_blank" href="http://book.cakephp.org/2.0/en/development/configuration.html#cakephp-core-configuration" style="color:#fff;">I don't / can't use URL rewriting</a>
+</p>
+{{# runTests }}
+	<p>
+		<span class="notice{{ extraClass }}">
+			{{{ message }}}
+		</span>
+	</p>
+{{/ runTests }}
+
+<h3>{{ editingPageHeading }}</h3>
+<p>
+{{{ editingPageText }}}
+</p>
+
+<h3>{{ gettingStartedHeading }}</h3>
+<p>{{{ cakeDocsLink }}}</p>
+<p>{{{ blogTutorialLink }}}</p>
+
+<h3>{{ officialPluginsHeading }}</h3>
+<p>
+<ul>
+	<li>{{{ debugKitLink }}}</li>
+	<li>{{{ localizedLink }}}</li>
+</ul>
+</p>
+
+<h3>{{ moreAboutCakeHeading }}</h3>
+<p>{{ cakeDescription }}</p>
+<p>{{ cakeGoal }}</p>
+
+<ul>
+{{# extraLinks }}
+	<li>
+		<a href="{{ url }}">{{ title }}</a>
+		<ul><li>{{ description }}</li></ul>
+	</li>
+{{/ extraLinks }}
+</ul>
