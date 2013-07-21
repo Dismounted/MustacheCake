@@ -56,6 +56,8 @@ From the render class, you can create methods to run whatever logic you need. On
 
 A render class extending `MustacheRender` will also import any defined "view blocks" as view variables, overwriting view variables of the same name (if they exist). View blocks are not recommended to be used, but they are necessary to grab special Cake ones like `content`, `css`, and `script`.
 
+`MustacheRender::init()` will be run, if it exists, immediately after instantiation.
+
 As you can see, render classes can become a very useful and powerful tool, allowing you to keep your templates "clean". However, it is not necessary to create a render class. If one does not exist, MustacheCake will simply use view variables set from the controller.
 
 ## Confused? ##
