@@ -38,16 +38,16 @@ abstract class MustacheRender {
 	public function __construct(MustacheView $View = null, $viewVars = array()) {
 		$this->_View = $View;
 
+		if (method_exists($this, 'init') === true) {
+			$this->init();
+		}
+
 		foreach ($viewVars as $name => $data) {
 			$this->{$name} = $data;
 		}
 
 		foreach ($View->blocks() as $name) {
 			$this->{$name} = $View->fetch($name);
-		}
-
-		if (method_exists($this, 'init') === true) {
-			$this->init();
 		}
 	}
 
