@@ -19,7 +19,7 @@ App::uses('MustacheRender', 'MustacheCake.View');
  */
 class DefaultLayoutRender extends MustacheRender {
 
-	public function init() {
+	protected function _init() {
 		$this->cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework');
 	}
 

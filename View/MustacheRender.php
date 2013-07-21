@@ -37,10 +37,7 @@ abstract class MustacheRender {
 	 */
 	public function __construct(MustacheView $View = null, $viewVars = array()) {
 		$this->_View = $View;
-
-		if (method_exists($this, 'init') === true) {
-			$this->init();
-		}
+		$this->_init();
 
 		foreach ($viewVars as $name => $data) {
 			$this->{$name} = $data;
@@ -49,6 +46,15 @@ abstract class MustacheRender {
 		foreach ($View->blocks() as $name) {
 			$this->{$name} = $View->fetch($name);
 		}
+	}
+
+	/**
+	 * Called during construction.
+	 *
+	 * This is useful if you need to setup class properties or add things to blocks (e.g. CSS).
+	 * It is better to override this, rather than MustacheRender::__construct().
+	 */
+	protected function _init() {
 	}
 
 }
