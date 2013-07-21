@@ -27,23 +27,23 @@ abstract class MustacheRender {
 	 *
 	 * @var MustacheView
 	 */
-	protected $_view;
+	protected $_View;
 
 	/**
 	 * Constructor.
 	 *
-	 * @param MustacheView $view View object calling the render.
+	 * @param MustacheView $View View object calling the render.
 	 * @param array $viewVars Variables to plug into the template.
 	 */
-	public function __construct(MustacheView $view = null, $viewVars = array()) {
-		$this->_view = $view;
+	public function __construct(MustacheView $View = null, $viewVars = array()) {
+		$this->_View = $View;
 
 		foreach ($viewVars as $name => $data) {
 			$this->{$name} = $data;
 		}
 
-		foreach ($view->blocks() as $name) {
-			$this->{$name} = $view->fetch($name);
+		foreach ($View->blocks() as $name) {
+			$this->{$name} = $View->fetch($name);
 		}
 	}
 

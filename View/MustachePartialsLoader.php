@@ -29,25 +29,25 @@ class MustachePartialsLoader implements Mustache_Loader {
 	 *
 	 * @var MustacheView
 	 */
-	protected $_view;
+	protected $_View;
 
 	/**
 	 * Constructor.
 	 *
-	 * @param MustacheView $view View object calling the render.
+	 * @param MustacheView $View View object calling the render.
 	 */
-	public function __construct(MustacheView $view) {
-		$this->_view = $view;
+	public function __construct(MustacheView $View) {
+		$this->_View = $View;
 	}
 
 	/**
 	 * Load a Template by name. Returning empty string on failure matches Cake behaviour.
 	 *
 	 * @param string $name
-	 * @return string Mustache Template source.
+	 * @return string Mustache template source.
 	 */
 	public function load($name) {
-		$file = $this->_view->getPartialFileName($name);
+		$file = $this->_View->getPartialFileName($name);
 
 		if ($file === false) {
 			return '';

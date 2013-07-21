@@ -19,41 +19,41 @@ App::uses('MustacheRender', 'MustacheCake.View');
  */
 class DefaultLayoutRender extends MustacheRender {
 
-	public function __construct(MustacheView $view = null, $viewVars = array()) {
-		parent::__construct($view, $viewVars);
+	public function __construct(MustacheView $View = null, $viewVars = array()) {
+		parent::__construct($View, $viewVars);
 		$this->cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework');
 	}
 
 	public function charset() {
-		return $this->_view->Html->charset();
+		return $this->_View->Html->charset();
 	}
 
 	public function icon() {
-		return $this->_view->Html->meta('icon');
+		return $this->_View->Html->meta('icon');
 	}
 
 	public function cssCakeGeneric() {
-		return $this->_view->Html->css('cake.generic');
+		return $this->_View->Html->css('cake.generic');
 	}
 
 	public function cakeLink() {
-		return $this->_view->Html->link($this->cakeDescription, 'http://cakephp.org');
+		return $this->_View->Html->link($this->cakeDescription, 'http://cakephp.org');
 	}
 
 	public function sessionFlash() {
-		return $this->_view->Session->flash();
+		return $this->_View->Session->flash();
 	}
 
 	public function cakeImage() {
-		return $this->_view->Html->link(
-			$this->_view->Html->image('cake.power.gif', array('alt' => $this->cakeDescription, 'border' => '0')),
+		return $this->_View->Html->link(
+			$this->_View->Html->image('cake.power.gif', array('alt' => $this->cakeDescription, 'border' => '0')),
 			'http://www.cakephp.org/',
 			array('target' => '_blank', 'escape' => false)
 		);
 	}
 
 	public function sqlDump() {
-		return $this->_view->element('sql_dump');
+		return $this->_View->element('sql_dump');
 	}
 
 }

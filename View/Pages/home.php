@@ -149,7 +149,7 @@ class PagesHomeRender extends MustacheRender {
 		} else {
 			$message = __d('cake_dev', 'DebugKit is not installed. It will help you inspect and debug different aspects of your application.')
 				. '<br/>'
-				. __d('cake_dev', 'You can install it from %s', $this->_view->Html->link('github', 'https://github.com/cakephp/debug_kit'));
+				. __d('cake_dev', 'You can install it from %s', $this->_View->Html->link('github', 'https://github.com/cakephp/debug_kit'));
 			return array('message' => $message);
 		}
 	}
@@ -169,7 +169,7 @@ You can also add some CSS styles for your pages at: APP/webroot/css.');
 	}
 
 	public function cakeDocsLink() {
-		return $this->_view->Html->link(
+		return $this->_View->Html->link(
 			sprintf('<strong>%s</strong> %s', __d('cake_dev', 'New'), __d('cake_dev', 'CakePHP 2.0 Docs')),
 			'http://book.cakephp.org/2.0/en/',
 			array('target' => '_blank', 'escape' => false)
@@ -177,7 +177,7 @@ You can also add some CSS styles for your pages at: APP/webroot/css.');
 	}
 
 	public function blogTutorialLink() {
-		return $this->_view->Html->link(
+		return $this->_View->Html->link(
 			__d('cake_dev', 'The 15 min Blog Tutorial'),
 			'http://book.cakephp.org/2.0/en/tutorials-and-examples/blog/blog.html',
 			array('target' => '_blank', 'escape' => false)
@@ -189,13 +189,13 @@ You can also add some CSS styles for your pages at: APP/webroot/css.');
 	}
 
 	public function debugKitLink() {
-		return $this->_view->Html->link('DebugKit', 'https://github.com/cakephp/debug_kit')
+		return $this->_View->Html->link('DebugKit', 'https://github.com/cakephp/debug_kit')
 			. ': '
 			. __d('cake_dev', 'provides a debugging toolbar and enhanced debugging tools for CakePHP applications.');
 	}
 
 	public function localizedLink() {
-		return $this->_view->Html->link('Localized', 'https://github.com/cakephp/localized')
+		return $this->_View->Html->link('Localized', 'https://github.com/cakephp/localized')
 			. ': '
 			. __d('cake_dev', 'contains various localized validation classes and translations for specific countries');
 	}
