@@ -182,7 +182,7 @@ class MustacheView extends View {
 	/**
 	 * If Cake is using FileEngine, let's hop on!
 	 *
-	 * @return string The cache path, empty if not applicable.
+	 * @return mixed The cache path, null if not applicable.
 	 */
 	protected function _getMustacheCachePath() {
 		$settings = Cache::settings();
@@ -191,7 +191,7 @@ class MustacheView extends View {
 			return $settings['path'] . DS . 'mustache';
 		}
 
-		return '';
+		return null;
 	}
 
 	/**
