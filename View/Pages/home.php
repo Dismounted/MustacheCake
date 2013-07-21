@@ -245,7 +245,7 @@ You can also add some CSS styles for your pages at: APP/webroot/css.');
 				'description' => __d('cake_dev', 'A comprehensive list of all CakePHP plugins created by the community')
 			),
 			array(
-				'url' => 'http://groups.google.com/group/cake-php',
+				'url' => 'https://groups.google.com/group/cake-php',
 				'title' => __d('cake_dev', 'CakePHP Google Group'),
 				'description' => __d('cake_dev', 'Community mailing list')
 			),
@@ -255,12 +255,12 @@ You can also add some CSS styles for your pages at: APP/webroot/css.');
 				'description' => __d('cake_dev', 'Live chat about CakePHP')
 			),
 			array(
-				'url' => 'http://github.com/cakephp',
+				'url' => 'https://github.com/cakephp',
 				'title' => __d('cake_dev', 'CakePHP Code'),
 				'description' => __d('cake_dev', 'For the Development of CakePHP Git repository, Downloads')
 			),
 			array(
-				'url' => 'http://cakephp.lighthouseapp.com',
+				'url' => 'https://cakephp.lighthouseapp.com',
 				'title' => __d('cake_dev', 'CakePHP Lighthouse'),
 				'description' => __d('cake_dev', 'CakePHP Tickets, Wiki pages, Roadmap')
 			)
