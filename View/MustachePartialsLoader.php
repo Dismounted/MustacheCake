@@ -7,7 +7,7 @@
  * @copyright     Copyright (c) Hanson Wong
  * @link          https://github.com/Dismounted/MustacheCake
  * @package       MustacheCake.View
- * @license       Simplified BSD License (https://github.com/Dismounted/MustacheCake/blob/master/LICENSE)
+ * @license       https://github.com/Dismounted/MustacheCake/blob/master/LICENSE Simplified BSD License
  */
 
 if (class_exists('Mustache_Autoloader', false) === false) {

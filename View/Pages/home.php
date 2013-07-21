@@ -6,8 +6,8 @@
  *
  * @copyright     Copyright (c) Hanson Wong
  * @link          https://github.com/Dismounted/MustacheCake
- * @package       MustacheCake.View
- * @license       Simplified BSD License (https://github.com/Dismounted/MustacheCake/blob/master/LICENSE)
+ * @package       MustacheCake.View.Pages
+ * @license       https://github.com/Dismounted/MustacheCake/blob/master/LICENSE Simplified BSD License
  */
 
 App::uses('MustacheRender', 'MustacheCake.View');
@@ -20,7 +20,7 @@ if (!Configure::read('debug')) {
 /**
  * Cake default home render class.
  *
- * @package       MustacheCake.View
+ * @package       MustacheCake.View.Pages
  */
 class PagesHomeRender extends MustacheRender {
 
