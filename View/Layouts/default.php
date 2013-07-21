@@ -19,8 +19,7 @@ App::uses('MustacheRender', 'MustacheCake.View');
  */
 class DefaultLayoutRender extends MustacheRender {
 
-	public function __construct(MustacheView $View = null, $viewVars = array()) {
-		parent::__construct($View, $viewVars);
+	public function init() {
 		$this->cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework');
 	}
 

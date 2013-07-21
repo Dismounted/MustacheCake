@@ -45,6 +45,10 @@ abstract class MustacheRender {
 		foreach ($View->blocks() as $name) {
 			$this->{$name} = $View->fetch($name);
 		}
+
+		if (method_exists($this, 'init') === true) {
+			$this->init();
+		}
 	}
 
 }
