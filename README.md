@@ -44,7 +44,11 @@ MustacheCake tries to be smart: if a template is not found with the extension sp
 
 Partials are loaded from `app/View/Elements` automatically. Calling `{{> foo }}` will include `app/View/Elements/foo.mustache`. Missing partials are simply returned as empty strings, no exceptions or errors will be recorded.
 
-It is not recommended to call `View::element()` while using MustacheCake as the partials syntax should cover all your needs. However, it is not explicitly disallowed. Calling it will render the element as a separate template, so watch out for variable scope issues if you decide you need to call `View::element()`.
+While using Mustache syntax to call partials is recommended, you can also call `$this->_View->element()` in a render class. This should only be used if unavoidable. An example of such a situation is when you need to include a non-Mustache partial (i.e. a `.ctp` template).
+
+Note that there is a difference in variable scope between the two methods described above.
+
+You can also call `View::element()` in `.ctp` templates to include a Mustache partial in non-Mustache templates.
 
 ### Render Classes ###
 
