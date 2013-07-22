@@ -56,9 +56,7 @@ You can also create a file to accompany the template as a "render class". Place 
 
 Inside the render class file, create a class that extends `MustacheRender`, ensuring to call `App::uses('MustacheRender', 'MustacheCake.View');` beforehand. The class can be named whatever you like, as long as it does not conflict with any other class's name.
 
-From the render class, you can create methods to run whatever logic you need. One common use case would be to call Cake helpers (through `$this->_View`). A call to `{{ foo }}` in the template will attempt to call the `foo` method in the render class. If the method does not exist, the `foo` view variable will be returned instead.
-
-A render class extending `MustacheRender` will also import any defined "view blocks" as view variables, overwriting view variables of the same name (if they exist). View blocks are not recommended to be used, but they are necessary to grab special Cake ones like `content`, `css`, and `script`.
+From the render class, you can create methods to run whatever logic you need. One common use case would be to call `$this->_View` to access Cake helpers, elements and blocks. A call to `{{ foo }}` in the template will attempt to call the `foo` method in the render class. If the method does not exist, the `foo` view variable will be returned instead.
 
 `MustacheRender::_init()` will be run during `MustacheCake::__construct()`. Override this method to setup your template (e.g. adding scripts to its view block using `HtmlHelper`).
 

@@ -35,12 +35,28 @@ class DefaultLayoutRender extends MustacheRender {
 		return $this->_View->Html->css('cake.generic');
 	}
 
+	public function meta() {
+		return $this->_View->fetch('meta');
+	}
+
+	public function css() {
+		return $this->_View->fetch('css');
+	}
+
+	public function script() {
+		return $this->_View->fetch('script');
+	}
+
 	public function cakeLink() {
 		return $this->_View->Html->link($this->cakeDescription, 'http://cakephp.org');
 	}
 
 	public function sessionFlash() {
 		return $this->_View->Session->flash();
+	}
+
+	public function content() {
+		return $this->_View->fetch('content');
 	}
 
 	public function cakeImage() {

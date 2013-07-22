@@ -16,8 +16,6 @@
  * Mustache views can create an extra file in the same directory and extend this class.
  * The class will be instantiated automatically by the MustacheView class when required.
  *
- * Note that Cake's "view blocks" are auto-imported as view variables with this class.
- *
  * @package       MustacheCake.View
  */
 abstract class MustacheRender {
@@ -37,15 +35,12 @@ abstract class MustacheRender {
 	 */
 	public function __construct(MustacheView $View = null, $viewVars = array()) {
 		$this->_View = $View;
-		$this->_init();
 
 		foreach ($viewVars as $name => $data) {
 			$this->{$name} = $data;
 		}
 
-		foreach ($View->blocks() as $name) {
-			$this->{$name} = $View->fetch($name);
-		}
+		$this->_init();
 	}
 
 	/**
