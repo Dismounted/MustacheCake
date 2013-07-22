@@ -38,7 +38,7 @@ Layouts and views are processed via Cake conventions; just create templates in t
 
 So for the `bar` action in `FooController`, create `bar.mustache` in `app/View/Foo`.
 
-MustacheCake tries to be smart: any template with the extension `.ctp` will be rendered by the default Cake View class. This allows you to gradually migrate across to Mustache.
+MustacheCake tries to be smart: if a template is not found with the extension specified in `Controller::$ext` or `.mustache`, it will search for one with `.ctp`. Any `.ctp` file will be rendered by the default Cake View class. This allows you to gradually migrate across to Mustache and to use plugins without rewriting their views.
 
 ### Partials ###
 
