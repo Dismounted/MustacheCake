@@ -1,0 +1,26 @@
+language: php
+
+php:
+  - 5.5
+  - 5.4
+  - 5.3
+
+env:
+  - CAKE_VERSION=2.3.8
+  - CAKE_VERSION=2.2.9
+  - CAKE_VERSION=2.1.5
+  - CAKE_VERSION=2.0.6
+
+before_install:
+  - git submodule update --init --recursive
+
+before_script:
+  - git clone https://github.com/cakephp/cakephp.git ../cakephp
+  - cd ../cakephp
+  - git checkout $CAKE_VERSION
+  - mv ../MustacheCake app/Plugin/MustacheCake
+  - chmod -R 777 app/tmp
+
+script:
+  - cd app
+  - ./Console/cake test MustacheCake AllTests --stderr
