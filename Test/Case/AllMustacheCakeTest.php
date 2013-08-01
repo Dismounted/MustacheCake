@@ -22,7 +22,7 @@ class AllMustacheCakeTest extends CakeTestSuite {
 	/**
 	 * Define the tests for this suite.
 	 *
-	 * @return void
+	 * @return CakeTestSuite
 	 */
 	public static function suite() {
 		$path = CakePlugin::path('MustacheCake') . 'Test' . DS . 'Case';
