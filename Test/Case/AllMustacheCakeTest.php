@@ -18,5 +18,17 @@
  * @package       MustacheCake.Test.Case
  */
 class AllMustacheCakeTest extends CakeTestSuite {
-	
+
+	/**
+	 * Define the tests for this suite.
+	 *
+	 * @return void
+	 */
+	public static function suite() {
+		$path = CakePlugin::path('MustacheCake') . 'Test' . DS . 'Case';
+		$suite = new CakeTestSuite('All MustacheCake Tests');
+		$suite->addTestDirectoryRecursive($path);
+		return $suite;
+	}
+
 }
