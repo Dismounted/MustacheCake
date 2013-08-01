@@ -22,4 +22,4 @@ before_script:
   - chmod -R 777 tmp
 
 script:
-  - ./Console/cake test MustacheCake AllTests --stderr
+  - ./Console/cake test MustacheCake AllMustacheCake --stderr
