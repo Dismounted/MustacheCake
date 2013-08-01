@@ -1,8 +1,8 @@
 # MustacheCake #
 
-[![Build Status](https://travis-ci.org/Dismounted/MustacheCake.png)](https://travis-ci.org/Dismounted/MustacheCake)
-
 A Mustache implementation for CakePHP.
+
+[![Build Status](https://travis-ci.org/Dismounted/MustacheCake.png?branch=master)](https://travis-ci.org/Dismounted/MustacheCake)
 
 ## Requirements ##
 
