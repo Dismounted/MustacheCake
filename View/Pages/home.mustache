@@ -9,11 +9,11 @@
 	2) <a target="_blank" href="http://book.cakephp.org/2.0/en/development/configuration.html#cakephp-core-configuration" style="color:#fff;">I don't / can't use URL rewriting</a>
 </p>
 {{# runTests }}
-	<p>
-		<span class="notice{{ extraClass }}">
-			{{{ message }}}
-		</span>
-	</p>
+<p>
+	<span class="notice{{ extraClass }}">
+		{{{ message }}}
+	</span>
+</p>
 {{/ runTests }}
 
 <h3>{{ editingPageHeading }}</h3>
@@ -38,10 +38,10 @@
 <p>{{ cakeGoal }}</p>
 
 <ul>
-{{# extraLinks }}
+	{{# extraLinks }}
 	<li>
 		<a href="{{ url }}">{{ title }}</a>
 		<ul><li>{{ description }}</li></ul>
 	</li>
-{{/ extraLinks }}
+	{{/ extraLinks }}
 </ul>
