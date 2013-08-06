@@ -58,7 +58,7 @@ Inside the view model file, create a class that extends `MustacheViewModel`, ens
 
 From the view model, you can create methods to run whatever logic you need. One common use case would be to call `$this->_View` to access Cake helpers, elements and blocks. A call to `{{ foo }}` in the template will attempt to call the `foo` method in the view model. If the method does not exist, the `foo` view variable will be returned instead.
 
-`MustacheViewModel::_init()` will be run during `MustacheCake::__construct()`. Override this method to setup your template (e.g. adding scripts to its view block using `HtmlHelper`).
+`MustacheViewModel::_init()` will be run during `MustacheViewModel::__construct()`. Override this method to setup your template (e.g. adding scripts to its view block using `HtmlHelper`).
 
 As you can see, view models can become a very useful and powerful tool, allowing you to keep your templates "clean" and your models free of presentation logic. However, it is not necessary to create a view model. If one does not exist, MustacheCake will simply use view variables set from the controller.
 
