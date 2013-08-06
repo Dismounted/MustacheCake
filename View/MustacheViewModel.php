@@ -11,14 +11,14 @@
  */
 
 /**
- * Mustache render class.
+ * Mustache view model.
  *
  * Mustache views can create an extra file in the same directory and extend this class.
  * The class will be instantiated automatically by the MustacheView class when required.
  *
  * @package       MustacheCake.View
  */
-abstract class MustacheRender {
+abstract class MustacheViewModel {
 
 	/**
 	 * An instance of the View object.
@@ -47,7 +47,7 @@ abstract class MustacheRender {
 	 * Called during construction.
 	 *
 	 * This is useful if you need to setup class properties or add things to blocks (e.g. CSS).
-	 * It is better to override this, rather than MustacheRender::__construct().
+	 * It is better to override this, rather than MustacheViewModel::__construct().
 	 */
 	protected function _init() {
 	}
