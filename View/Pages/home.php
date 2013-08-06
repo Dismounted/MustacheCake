@@ -10,7 +10,7 @@
  * @license       https://github.com/Dismounted/MustacheCake/blob/master/LICENSE Simplified BSD License
  */
 
-App::uses('MustacheRender', 'MustacheCake.View');
+App::uses('MustacheViewModel', 'MustacheCake.View');
 App::uses('Debugger', 'Utility');
 
 if (!Configure::read('debug')) {
@@ -18,11 +18,11 @@ if (!Configure::read('debug')) {
 }
 
 /**
- * Cake default home render class.
+ * Cake default home view model.
  *
  * @package       MustacheCake.View.Pages
  */
-class PagesHomeRender extends MustacheRender {
+class PagesHomeViewModel extends MustacheViewModel {
 
 	public function mainHeading() {
 		return __d('cake_dev', 'Release Notes for CakePHP %s.', Configure::version());
