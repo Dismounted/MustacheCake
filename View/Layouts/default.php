@@ -10,14 +10,14 @@
  * @license       https://github.com/Dismounted/MustacheCake/blob/master/LICENSE Simplified BSD License
  */
 
-App::uses('MustacheRender', 'MustacheCake.View');
+App::uses('MustacheViewModel', 'MustacheCake.View');
 
 /**
- * Cake default layout render class.
+ * Cake default layout view model.
  *
  * @package       MustacheCake.View.Layouts
  */
-class DefaultLayoutRender extends MustacheRender {
+class DefaultLayoutViewModel extends MustacheViewModel {
 
 	protected function _init() {
 		$this->cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework');

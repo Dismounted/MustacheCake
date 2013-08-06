@@ -30,11 +30,11 @@ class MustacheView extends View {
 	public $ext = '.mustache';
 
 	/**
-	 * File extension for render classes.
+	 * File extension for view models.
 	 *
 	 * @var string
 	 */
-	public $extRenderClass = '.php';
+	public $extViewModel = '.php';
 
 	/**
 	 * An instance of the Mustache engine.
@@ -105,26 +105,26 @@ class MustacheView extends View {
 	}
 
 	/**
-	 * Grab the render class associated with the view, if it exists.
+	 * Grab the view model associated with the view, if it exists.
 	 *
 	 * @param string $viewFn Filename of the view.
 	 * @param array $dataForView Data to include in rendered view.
-	 * @return mixed Return a MustacheRender object, or hand back untouched array.
+	 * @return mixed Return a MustacheViewModel object, or hand back untouched array.
 	 */
 	protected function _getRenderData($viewFile, $dataForView) {
-		$renderClassPath = preg_replace(
+		$viewModelPath = preg_replace(
 			'/' . preg_quote($this->_getViewExt($viewFile)) . '$/i',
-			$this->extRenderClass,
+			$this->extViewModel,
 			$viewFile
 		);
 
-		$renderClassName = $this->_getRenderClassName($renderClassPath);
-		if (empty($renderClassName) === true) {
+		$viewModelName = $this->_getViewModelName($viewModelPath);
+		if (empty($viewModelName) === true) {
 			return $dataForView;
 		}
 
-		require_once($renderClassPath);
-		return new $renderClassName($this, $dataForView);
+		require_once($viewModelPath);
+		return new $viewModelName($this, $dataForView);
 	}
 
 	/**
@@ -133,7 +133,7 @@ class MustacheView extends View {
 	 * @param string $file Filename of the class.
 	 * @return string Class name, empty if none found.
 	 */
-	protected function _getRenderClassName($file) {
+	protected function _getViewModelName($file) {
 		if (file_exists($file) === false) {
 			return '';
 		}
