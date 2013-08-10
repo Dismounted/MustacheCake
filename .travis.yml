@@ -28,9 +28,8 @@ before_script:
       git clone https://github.com/cakephp/cakephp.git ../cakephp;
       cd ../cakephp;
       git checkout $CAKE_VERSION;
-      cd app;
-      mv ../../MustacheCake Plugin/MustacheCake;
-      chmod -R 777 tmp;
+      cp -R ../MustacheCake app/Plugin/MustacheCake;
+      chmod -R 777 app/tmp;
       fi"
   - sh -c "if [ '$PHPCS' = '1' ]; then
       pear channel-discover pear.cakephp.org;
@@ -39,5 +38,8 @@ before_script:
       fi"
 
 script:
-  - sh -c "if [ '$PHPCS' != '1' ]; then ./Console/cake test MustacheCake AllTests --stderr; fi"
+  - sh -c "if [ '$PHPCS' != '1' ]; then
+      cd ../cakephp/app;
+      ./Console/cake test MustacheCake AllTests --stderr;
+      fi"
   - sh -c "if [ '$PHPCS' = '1' ]; then phpcs -p --extensions=php --standard=CakePHP .; fi"
