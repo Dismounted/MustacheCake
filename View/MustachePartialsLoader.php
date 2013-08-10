@@ -24,28 +24,28 @@ if (class_exists('Mustache_Autoloader', false) === false) {
  */
 class MustachePartialsLoader implements Mustache_Loader {
 
-	/**
-	 * An instance of the View object.
-	 *
-	 * @var MustacheView
-	 */
+/**
+ * An instance of the View object.
+ *
+ * @var MustacheView
+ */
 	protected $_View;
 
-	/**
-	 * Constructor.
-	 *
-	 * @param MustacheView $View View object calling the render.
-	 */
+/**
+ * Constructor.
+ *
+ * @param MustacheView $View View object calling the render.
+ */
 	public function __construct(MustacheView $View) {
 		$this->_View = $View;
 	}
 
-	/**
-	 * Load a Template by name. Returning empty string on failure matches Cake behaviour.
-	 *
-	 * @param string $name
-	 * @return string Mustache template source.
-	 */
+/**
+ * Load a Template by name. Returning empty string on failure matches Cake behaviour.
+ *
+ * @param string $name
+ * @return string Mustache template source.
+ */
 	public function load($name) {
 		$file = $this->_View->getPartialFileName($name);
 

@@ -19,11 +19,11 @@
  */
 class AllTestsTest extends CakeTestSuite {
 
-	/**
-	 * Define the tests for this suite.
-	 *
-	 * @return CakeTestSuite
-	 */
+/**
+ * Define the tests for this suite.
+ *
+ * @return CakeTestSuite
+ */
 	public static function suite() {
 		$path = CakePlugin::path('MustacheCake') . 'Test' . DS . 'Case';
 		$suite = new CakeTestSuite('All MustacheCake Tests');
