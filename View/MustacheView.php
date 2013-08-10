@@ -216,7 +216,7 @@ class MustacheView extends View {
 /**
  * Silences errors from token_get_all() in MustacheView::_getViewModelName().
  *
- * @return bool Will always return true to disable internal error handler.
+ * @return boolean Always returns true to disable internal error handler.
  */
 	public static function handleTokenError() {
 		return true;
