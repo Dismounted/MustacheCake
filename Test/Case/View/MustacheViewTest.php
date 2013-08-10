@@ -59,8 +59,7 @@ class TestMustacheView extends MustacheView {
 class MustacheViewTest extends CakeTestCase {
 
 	public function testTokenErrorSuppress() {
-		$View = new TestMustacheView();
-		$this->assertEquals(true, $View::handleTokenError());
+		$this->assertEquals(true, TestMustacheView::handleTokenError());
 	}
 
 }
