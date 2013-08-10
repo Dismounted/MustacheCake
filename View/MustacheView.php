@@ -146,10 +146,12 @@ class MustacheView extends View {
 			if (feof($fp)) {
 				break;
 			}
-
 			$buffer .= fread($fp, 512);
-			// Errors silenced as we may be cutting an incomplete part of code with 512 bytes.
-			$tokens = @token_get_all($buffer);
+
+			// We may be cutting an incomplete part of code with 512 bytes, so suppress errors.
+			set_error_handler(array(__CLASS__, 'handleTokenError'));
+			$tokens = token_get_all($buffer);
+			restore_error_handler();
 
 			if (strpos($buffer, '{') === false) {
 				continue;
@@ -209,6 +211,15 @@ class MustacheView extends View {
 			$exts[] = '.ctp';
 		}
 		return $exts;
+	}
+
+/**
+ * Silences errors from token_get_all() in MustacheView::_getViewModelName().
+ *
+ * @return bool Will always return true to disable internal error handler.
+ */
+	public static function handleTokenError() {
+		return true;
 	}
 
 }
