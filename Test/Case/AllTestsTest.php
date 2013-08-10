@@ -17,7 +17,7 @@
  *
  * @package       MustacheCake.Test.Case
  */
-class AllTestsTest extends CakeTestSuite {
+class AllTestsTest extends CakeTestCase {
 
 /**
  * Define the tests for this suite.
