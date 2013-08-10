@@ -19,9 +19,11 @@ matrix:
       env:
         - CAKE_VERSION=2.3.8
         - PHPCS=1
+      git:
+        submodules: false
 
 before_install:
-  - git submodule update --init --recursive
+  - sh -c "if [ '$PHPCS' != '1' ]; then git submodule update --init --recursive; fi"
 
 before_script:
   - sh -c "if [ '$PHPCS' = '1' ]; then pear channel-discover pear.cakephp.org; fi"
