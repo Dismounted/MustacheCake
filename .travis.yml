@@ -24,18 +24,18 @@ before_install:
   - sh -c "if [ '$PHPCS' != '1' ]; then git submodule update --init --recursive; fi"
 
 before_script:
-  - sh -c "if [ '$PHPCS' != '1' ]; then \
-      git clone https://github.com/cakephp/cakephp.git ../cakephp \
-      cd ../cakephp \
-      git checkout $CAKE_VERSION \
-      cd app \
-      mv ../../MustacheCake Plugin/MustacheCake \
-      chmod -R 777 tmp \
+  - sh -c "if [ '$PHPCS' != '1' ]; then
+      git clone https://github.com/cakephp/cakephp.git ../cakephp;
+      cd ../cakephp;
+      git checkout $CAKE_VERSION;
+      cd app;
+      mv ../../MustacheCake Plugin/MustacheCake;
+      chmod -R 777 tmp;
       fi"
-  - sh -c "if [ '$PHPCS' = '1' ]; then \
-      pear channel-discover pear.cakephp.org \
-      pear install --alldeps cakephp/CakePHP_CodeSniffer \
-      phpenv rehash \
+  - sh -c "if [ '$PHPCS' = '1' ]; then
+      pear channel-discover pear.cakephp.org;
+      pear install --alldeps cakephp/CakePHP_CodeSniffer;
+      phpenv rehash;
       fi"
 
 script:
