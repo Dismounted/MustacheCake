@@ -46,8 +46,12 @@ abstract class MustacheViewModel {
 /**
  * Called during construction.
  *
- * This is useful if you need to setup class properties or add things to blocks (e.g. CSS).
+ * This is useful if you need to set up class properties or add things to blocks (e.g. CSS).
  * It is better to override this, rather than MustacheViewModel::__construct().
+ *
+ * This method is not abstract because overriding it is not necessary.
+ *
+ * @return void
  */
 	protected function _init() {
 	}
