@@ -221,7 +221,7 @@ You can also add some CSS styles for your pages at: APP/webroot/css.');
 			),
 			array(
 				'url' => 'http://www.cakephp.org',
-				'title' => __d('cake_dev', 'CakePHP'),
+				'title' => 'CakePHP',
 				'description' => __d('cake_dev', 'The Rapid Development Framework')
 			),
 			array(
