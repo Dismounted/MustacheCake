@@ -37,8 +37,8 @@ class TestMustacheView extends MustacheView {
 		return $this->_getRenderData($viewFile, $dataForView);
 	}
 
-	public function getRenderClassName($file) {
-		return $this->_getRenderClassName($file);
+	public function getViewModelName($file) {
+		return $this->_getViewModelName($file);
 	}
 
 	public function getMustacheCachePath() {
@@ -58,8 +58,38 @@ class TestMustacheView extends MustacheView {
  */
 class MustacheViewTest extends CakeTestCase {
 
+	public function testMustacheEngineInstance() {
+		$View = new TestMustacheView;
+		$this->assertInstanceOf('Mustache_Engine', $View->mustache);
+	}
+
+	public function testGetViewExt() {
+		$View = new TestMustacheView;
+		$this->assertEquals('.mustache', $View->getViewExt('/Posts/index.mustache'));
+	}
+
+	public function testGetViewModelName() {
+		$View = new TestMustacheView;
+		$this->assertEquals('IndexViewModel', $View->getViewModelName('/Posts/index.mustache'));
+	}
+
+	public function testGetMustacheCachePath() {
+		$View = new TestMustacheView;
+		// We're using default config, so file cache is enabled.
+		$this->assertInternalType('string', $View->getMustacheCachePath());
+		// Do something to make it return null...
+	}
+
+	public function testGetExtensions() {
+		$View = new TestMustacheView;
+		$exts = $View->getExtensions();
+		$this->assertInternalType('array', $exts);
+		$this->assertContains('.mustache', $exts);
+		$this->assertContains('.ctp', $exts);
+	}
+
 	public function testTokenErrorSuppress() {
-		$this->assertEquals(true, TestMustacheView::handleTokenError());
+		$this->assertTrue(TestMustacheView::handleTokenError());
 	}
 
 }
