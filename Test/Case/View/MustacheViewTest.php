@@ -104,8 +104,9 @@ class MustacheViewTest extends CakeTestCase {
 	}
 
 	public function testGetViewModelName() {
-		$path = $this->viewPath . 'Mustache/viewmodel.mustache';
+		$path = $this->viewPath . 'Mustache/viewmodel.php';
 		$this->assertEquals('TestViewModel', $this->View->getViewModelName($path));
+		$this->assertEquals('', $this->View->getViewModelName('blah'));
 	}
 
 	public function testGetMustacheCachePath() {
@@ -140,7 +141,7 @@ class MustacheViewTest extends CakeTestCase {
 
 		$path = $this->viewPath . 'Mustache/index.mustache';
 		$result = $this->View->getRenderData($path, $vars);
-		$this->assertEquals($expected, $result);
+		$this->assertEquals($vars, $result);
 
 		$path = $this->viewPath . 'Mustache/viewmodel.mustache';
 		$result = $this->View->getRenderData($path, $vars);
