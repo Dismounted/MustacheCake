@@ -10,7 +10,27 @@
  * @license       https://github.com/Dismounted/MustacheCake/blob/master/LICENSE Simplified BSD License
  */
 
+App::uses('Cache', 'Cache');
+App::uses('Controller', 'Controller');
 App::uses('MustacheView', 'MustacheCake.View');
+
+/**
+ * MustacheCake controller for testing.
+ *
+ * @package       MustacheCake.Test.Case.View
+ */
+class TestMustacheController extends Controller {
+
+	public $name = 'Mustache';
+	public $uses = null;
+	public $viewClass = 'MustacheCake.Mustache';
+	public $ext = '.mustache';
+
+	public function index() {
+		$this->set('planet', 'world');
+	}
+
+}
 
 /**
  * Test MustacheView class.
@@ -21,16 +41,8 @@ App::uses('MustacheView', 'MustacheCake.View');
  */
 class TestMustacheView extends MustacheView {
 
-	public function evaluate($viewFile, $dataForView) {
-		return $this->_evaluate($viewFile, $dataForView);
-	}
-
 	public function getViewExt($viewFile) {
 		return $this->_getViewExt($viewFile);
-	}
-
-	public function getTemplateAsString($viewFile) {
-		return $this->_getTemplateAsString($viewFile);
 	}
 
 	public function getRenderData($viewFile, $dataForView) {
@@ -58,31 +70,54 @@ class TestMustacheView extends MustacheView {
  */
 class MustacheViewTest extends CakeTestCase {
 
+	public $Controller;
+	public $View;
+	public $viewPath;
+
+	public function setUp() {
+		parent::setUp();
+
+		$request = $this->getMock('CakeRequest');
+		$this->Controller = new TestMustacheController($request);
+		$this->Controller->index();
+		$this->View = new TestMustacheView($this->Controller);
+
+		$this->viewPath = CakePlugin::path('MustacheCake') . 'Test' . DS . 'test_app' . DS . 'View' . DS;
+		App::build(array('View' => array($this->viewPath)), App::RESET);
+	}
+
+	public function tearDown() {
+		parent::tearDown();
+
+		unset($this->Controller);
+		unset($this->View);
+		unset($this->viewPath);
+	}
+
 	public function testMustacheEngineInstance() {
-		$View = new TestMustacheView;
-		$this->assertInstanceOf('Mustache_Engine', $View->mustache);
+		$this->assertInstanceOf('Mustache_Engine', $this->View->mustache);
 	}
 
 	public function testGetViewExt() {
-		$View = new TestMustacheView;
-		$this->assertEquals('.mustache', $View->getViewExt('/Posts/index.mustache'));
+		$path = $this->viewPath . 'Mustache/index.mustache';
+		$this->assertEquals('.mustache', $this->View->getViewExt($path));
 	}
 
 	public function testGetViewModelName() {
-		$View = new TestMustacheView;
-		$this->assertEquals('IndexViewModel', $View->getViewModelName('/Posts/index.mustache'));
+		$path = $this->viewPath . 'Mustache/viewmodel.mustache';
+		$this->assertEquals('TestViewModel', $this->View->getViewModelName($path));
 	}
 
 	public function testGetMustacheCachePath() {
-		$View = new TestMustacheView;
 		// We're using default config, so file cache is enabled.
-		$this->assertInternalType('string', $View->getMustacheCachePath());
-		// Do something to make it return null...
+		$this->assertInternalType('string', $this->View->getMustacheCachePath());
+
+		Cache::drop('default');
+		$this->assertNull($this->View->getMustacheCachePath());
 	}
 
 	public function testGetExtensions() {
-		$View = new TestMustacheView;
-		$exts = $View->getExtensions();
+		$exts = $this->View->getExtensions();
 		$this->assertInternalType('array', $exts);
 		$this->assertContains('.mustache', $exts);
 		$this->assertContains('.ctp', $exts);
@@ -90,6 +125,60 @@ class MustacheViewTest extends CakeTestCase {
 
 	public function testTokenErrorSuppress() {
 		$this->assertTrue(TestMustacheView::handleTokenError());
+	}
+
+	public function testGetPartialFileName() {
+		$path = $this->viewPath . 'Elements/test_partial.mustache';
+		$this->assertEquals($path, $this->View->getPartialFileName('test_partial'));
+		$this->assertFalse($this->View->getPartialFileName('blah'));
+	}
+
+	public function testGetRenderData() {
+		$vars = array('foo' => 'bar');
+
+		$path = $this->viewPath . 'Mustache/index.mustache';
+		$result = $this->View->getRenderData($path, $vars);
+		$this->assertEquals($expected, $result);
+
+		$path = $this->viewPath . 'Mustache/viewmodel.mustache';
+		$result = $this->View->getRenderData($path, $vars);
+		$this->assertInstanceOf('TestViewModel', $result);
+	}
+
+	public function testViewModelViewObject() {
+		$path = $this->viewPath . 'Mustache/viewmodel.mustache';
+		$ViewModel = $this->View->getRenderData($path, array());
+		$this->assertInstanceOf('MustacheView', $ViewModel->getView());
+	}
+
+	public function testRenderSimple() {
+		$expected = 'Mustache Index';
+		$result = $this->View->render('index', false);
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testRenderWithVariables() {
+		$expected = 'Hello world!';
+		$result = $this->View->render('variables', false);
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testRenderWithViewModel() {
+		$expected = 'Hello world!';
+		$result = $this->View->render('viewmodel', false);
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testRenderWithPartial() {
+		$expected = 'Partial Test';
+		$result = $this->View->render('partial', false);
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testRenderCtpFallback() {
+		$expected = 'CTP Fallback';
+		$result = $this->View->render('ctp_fallback', false);
+		$this->assertEquals($expected, $result);
 	}
 
 }
