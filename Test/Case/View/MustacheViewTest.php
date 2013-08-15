@@ -109,11 +109,13 @@ class MustacheViewTest extends CakeTestCase {
 	}
 
 	public function testGetMustacheCachePath() {
-		// We're using default config, so file cache is enabled.
-		$this->assertInternalType('string', $this->View->getMustacheCachePath());
+		$settings = Cache::config('default');
 
 		Cache::drop('default');
 		$this->assertNull($this->View->getMustacheCachePath());
+
+		Cache::config('default', $settings);
+		$this->assertInternalType('string', $this->View->getMustacheCachePath());
 	}
 
 	public function testGetExtensions() {

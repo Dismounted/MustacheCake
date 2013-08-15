@@ -191,7 +191,7 @@ class MustacheView extends View {
 	protected function _getMustacheCachePath() {
 		$settings = Cache::settings();
 
-		if ($settings['engine'] == 'File') {
+		if (isset($settings['engine']) === true && $settings['engine'] == 'File') {
 			return $settings['path'] . DS . 'mustache';
 		}
 
