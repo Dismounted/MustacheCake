@@ -1,10 +1,10 @@
-# MustacheCake #
+# MustacheCake [![Build Status](https://travis-ci.org/Dismounted/MustacheCake.png?branch=master)](https://travis-ci.org/Dismounted/MustacheCake) #
 
 A Mustache implementation for CakePHP.
 
 ## Requirements ##
 
-* CakePHP 2.3 (May work on older versions of 2.x, not tested.)
+* CakePHP 2.x (Currently unit tested on latest tags from 2.1, 2.2, and 2.3 branches.)
 
 ## Installation ##
 

@@ -20,19 +20,19 @@
  */
 abstract class MustacheViewModel {
 
-	/**
-	 * An instance of the View object.
-	 *
-	 * @var MustacheView
-	 */
+/**
+ * An instance of the View object.
+ *
+ * @var MustacheView
+ */
 	protected $_View;
 
-	/**
-	 * Constructor.
-	 *
-	 * @param MustacheView $View View object calling the render.
-	 * @param array $viewVars Variables to plug into the template.
-	 */
+/**
+ * Constructor.
+ *
+ * @param MustacheView $View View object calling the render.
+ * @param array $viewVars Variables to plug into the template.
+ */
 	public function __construct(MustacheView $View = null, $viewVars = array()) {
 		$this->_View = $View;
 
@@ -43,12 +43,16 @@ abstract class MustacheViewModel {
 		$this->_init();
 	}
 
-	/**
-	 * Called during construction.
-	 *
-	 * This is useful if you need to setup class properties or add things to blocks (e.g. CSS).
-	 * It is better to override this, rather than MustacheViewModel::__construct().
-	 */
+/**
+ * Called during construction.
+ *
+ * This is useful if you need to set up class properties or add things to blocks (e.g. CSS).
+ * It is better to override this, rather than MustacheViewModel::__construct().
+ *
+ * This method is not abstract because overriding it is not necessary.
+ *
+ * @return void
+ */
 	protected function _init() {
 	}
 

@@ -87,7 +87,7 @@ class PagesHomeViewModel extends MustacheViewModel {
 	protected function _checkCache() {
 		$settings = Cache::settings();
 		if (!empty($settings)) {
-			return array('extraClass' => ' success', 'message' => __d('cake_dev', 'The %s is being used for core caching. To change the config edit APP/Config/core.php ', '<em>'. $settings['engine'] . 'Engine</em>'));
+			return array('extraClass' => ' success', 'message' => __d('cake_dev', 'The %s is being used for core caching. To change the config edit APP/Config/core.php ', '<em>' . $settings['engine'] . 'Engine</em>'));
 		} else {
 			return array('message' => __d('cake_dev', 'Your cache is NOT working. Please check the settings in APP/Config/core.php'));
 		}
@@ -99,9 +99,9 @@ class PagesHomeViewModel extends MustacheViewModel {
 			$this->filePresent = true;
 			return array('extraClass' => ' success', 'message' => __d('cake_dev', 'Your database configuration file is present.'));
 		} else {
-			$message = __d('cake_dev', 'Your database configuration file is NOT present.')
-				. '<br/>'
-				. __d('cake_dev', 'Rename APP/Config/database.php.default to APP/Config/database.php');
+			$message = __d('cake_dev', 'Your database configuration file is NOT present.') .
+				'<br/>' .
+				__d('cake_dev', 'Rename APP/Config/database.php.default to APP/Config/database.php');
 			return array('message' => $message);
 		}
 	}
@@ -125,9 +125,9 @@ class PagesHomeViewModel extends MustacheViewModel {
 			if ($connected && $connected->isConnected()) {
 				return array('extraClass' => ' success', 'message' => __d('cake_dev', 'Cake is able to connect to the database.'));
 			} else {
-				$message = __d('cake_dev', 'Cake is NOT able to connect to the database.')
-					. '<br /><br />'
-					. $errorMsg;
+				$message = __d('cake_dev', 'Cake is NOT able to connect to the database.') .
+					'<br /><br />' .
+					$errorMsg;
 				return array('message' => $message);
 			}
 		}
@@ -136,9 +136,9 @@ class PagesHomeViewModel extends MustacheViewModel {
 	protected function _checkPcreUnicode() {
 		App::uses('Validation', 'Utility');
 		if (!Validation::alphaNumeric('cakephp')) {
-			$message = __d('cake_dev', 'PCRE has not been compiled with Unicode support.')
-				. '<br/>'
-				. __d('cake_dev', 'Recompile PCRE with Unicode support by adding <code>--enable-unicode-properties</code> when configuring');
+			$message = __d('cake_dev', 'PCRE has not been compiled with Unicode support.') .
+				'<br/>' .
+				__d('cake_dev', 'Recompile PCRE with Unicode support by adding <code>--enable-unicode-properties</code> when configuring');
 			return array('message' => $message);
 		}
 	}
@@ -147,9 +147,9 @@ class PagesHomeViewModel extends MustacheViewModel {
 		if (CakePlugin::loaded('DebugKit')) {
 			return array('extraClass' => ' success', 'message' => __d('cake_dev', 'DebugKit plugin is present'));
 		} else {
-			$message = __d('cake_dev', 'DebugKit is not installed. It will help you inspect and debug different aspects of your application.')
-				. '<br/>'
-				. __d('cake_dev', 'You can install it from %s', $this->_View->Html->link('github', 'https://github.com/cakephp/debug_kit'));
+			$message = __d('cake_dev', 'DebugKit is not installed. It will help you inspect and debug different aspects of your application.') .
+				'<br/>' .
+				__d('cake_dev', 'You can install it from %s', $this->_View->Html->link('github', 'https://github.com/cakephp/debug_kit'));
 			return array('message' => $message);
 		}
 	}
@@ -189,15 +189,15 @@ You can also add some CSS styles for your pages at: APP/webroot/css.');
 	}
 
 	public function debugKitLink() {
-		return $this->_View->Html->link('DebugKit', 'https://github.com/cakephp/debug_kit')
-			. ': '
-			. __d('cake_dev', 'provides a debugging toolbar and enhanced debugging tools for CakePHP applications.');
+		return $this->_View->Html->link('DebugKit', 'https://github.com/cakephp/debug_kit') .
+			': ' .
+			__d('cake_dev', 'provides a debugging toolbar and enhanced debugging tools for CakePHP applications.');
 	}
 
 	public function localizedLink() {
-		return $this->_View->Html->link('Localized', 'https://github.com/cakephp/localized')
-			. ': '
-			. __d('cake_dev', 'contains various localized validation classes and translations for specific countries');
+		return $this->_View->Html->link('Localized', 'https://github.com/cakephp/localized') .
+			': ' .
+			__d('cake_dev', 'contains various localized validation classes and translations for specific countries');
 	}
 
 	public function moreAboutCakeHeading() {
@@ -221,7 +221,7 @@ You can also add some CSS styles for your pages at: APP/webroot/css.');
 			),
 			array(
 				'url' => 'http://www.cakephp.org',
-				'title' => __d('cake_dev', 'CakePHP'),
+				'title' => 'CakePHP',
 				'description' => __d('cake_dev', 'The Rapid Development Framework')
 			),
 			array(
