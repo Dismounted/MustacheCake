@@ -21,6 +21,7 @@ App::uses('MustachePartialsLoader', 'MustacheCake.View');
 class MustachePartialsLoaderTest extends CakeTestCase {
 
 	public $PartialsLoader;
+
 	public $viewPath;
 
 	public function setUp() {

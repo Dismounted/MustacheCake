@@ -22,8 +22,11 @@ App::uses('MustacheView', 'MustacheCake.View');
 class TestMustacheController extends Controller {
 
 	public $name = 'Mustache';
+
 	public $uses = null;
+
 	public $viewClass = 'MustacheCake.Mustache';
+
 	public $ext = '.mustache';
 
 	public function index() {
@@ -71,7 +74,9 @@ class TestMustacheView extends MustacheView {
 class MustacheViewTest extends CakeTestCase {
 
 	public $Controller;
+
 	public $View;
+
 	public $viewPath;
 
 	public function setUp() {
@@ -103,20 +108,26 @@ class MustacheViewTest extends CakeTestCase {
 		$this->assertEquals('.mustache', $this->View->getViewExt($path));
 	}
 
-	public function testGetViewModelName() {
+	public function testGetViewModelNameWithValidFile() {
 		$path = $this->viewPath . 'Mustache/viewmodel.php';
 		$this->assertEquals('TestViewModel', $this->View->getViewModelName($path));
+	}
+
+	public function testGetViewModelNameWithInvalidFile() {
 		$this->assertEquals('', $this->View->getViewModelName('blah'));
 	}
 
-	public function testGetMustacheCachePath() {
+	public function testGetMustacheCachePathWithValidCache() {
+		$this->assertInternalType('string', $this->View->getMustacheCachePath());
+	}
+
+	public function testGetMustacheCachePathWithInvalidCache() {
 		$settings = Cache::config('default');
 
 		Cache::drop('default');
 		$this->assertNull($this->View->getMustacheCachePath());
 
 		Cache::config('default', $settings);
-		$this->assertInternalType('string', $this->View->getMustacheCachePath());
 	}
 
 	public function testGetExtensions() {
