@@ -10,6 +10,7 @@
  * @license       https://github.com/Dismounted/MustacheCake/blob/master/LICENSE Simplified BSD License
  */
 
+App::uses('Cache', 'Cache');
 App::uses('View', 'View');
 App::uses('MustachePartialsLoader', 'MustacheCake.View');
 
