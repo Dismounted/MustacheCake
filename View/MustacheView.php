@@ -11,6 +11,7 @@
  */
 
 App::uses('Cache', 'Cache');
+App::uses('Configure', 'Core');
 App::uses('View', 'View');
 App::uses('MustachePartialsLoader', 'MustacheCake.View');
 
@@ -29,13 +30,6 @@ class MustacheView extends View {
  * @var string
  */
 	public $ext = '.mustache';
-
-/**
- * File extension for view models.
- *
- * @var string
- */
-	public $extViewModel = '.php';
 
 /**
  * An instance of the Mustache engine.
@@ -66,7 +60,7 @@ class MustacheView extends View {
 /**
  * Override to evaluate template through Mustache. Falls back on ".ctp" templates.
  *
- * @param string $viewFn Filename of the view.
+ * @param string $viewFile Filename of the view.
  * @param array $dataForView Data to include in rendered view.
  * @return string Rendered output.
  */
@@ -86,19 +80,9 @@ class MustacheView extends View {
 	}
 
 /**
- * Grab the view's file extension.
- *
- * @param string $viewFn Filename of the view.
- * @return string File extension.
- */
-	protected function _getViewExt($viewFile) {
-		return '.' . pathinfo($viewFile, PATHINFO_EXTENSION);
-	}
-
-/**
  * Grab the template as a string.
  *
- * @param string $viewFn Filename of the view.
+ * @param string $viewFile Filename of the view.
  * @return string Template before output.
  */
 	protected function _getTemplateAsString($viewFile) {
@@ -108,69 +92,38 @@ class MustacheView extends View {
 /**
  * Grab the view model associated with the view, if it exists.
  *
- * @param string $viewFn Filename of the view.
+ * @param string $viewFile Filename of the view.
  * @param array $dataForView Data to include in rendered view.
  * @return mixed Return a MustacheViewModel object, or hand back untouched array.
  */
 	protected function _getRenderData($viewFile, $dataForView) {
-		$viewModelPath = preg_replace(
-			'/' . preg_quote($this->_getViewExt($viewFile)) . '$/i',
-			$this->extViewModel,
-			$viewFile
-		);
+		$viewModelName = $this->_getViewModelName($viewFile);
 
-		$viewModelName = $this->_getViewModelName($viewModelPath);
 		if (empty($viewModelName) === true) {
 			return $dataForView;
 		}
 
-		require_once ($viewModelPath);
 		return new $viewModelName($this, $dataForView);
 	}
 
 /**
  * Looks through a file to find the name of the first declared class.
  *
- * @param string $file Filename of the class.
+ * @param string $viewFile Filename of the view.
  * @return string Class name, empty if none found.
  */
-	protected function _getViewModelName($file) {
-		if (file_exists($file) === false) {
+	protected function _getViewModelName($viewFile) {
+		Configure::write('MustacheCake.currentViewModel', '');
+
+		$viewFilePath = pathinfo($viewFile);
+		$neededPath = $viewFilePath['dirname'] . DS . $viewFilePath['filename'] . '.php';
+
+		if (file_exists($neededPath) === false) {
 			return '';
 		}
 
-		$fp = fopen($file, 'r');
-		$class = $buffer = '';
-		$i = 0;
-
-		while (!$class) {
-			if (feof($fp)) {
-				break;
-			}
-			$buffer .= fread($fp, 512);
-
-			// We may be cutting an incomplete part of code with 512 bytes, so suppress errors.
-			set_error_handler(array(__CLASS__, 'handleTokenError'));
-			$tokens = token_get_all($buffer);
-			restore_error_handler();
-
-			if (strpos($buffer, '{') === false) {
-				continue;
-			}
-
-			$tokenCount = count($tokens);
-			for (; $i < $tokenCount; ++$i) {
-				if ($tokens[$i][0] === T_CLASS) {
-					for ($j = ($i + 1); $j < $tokenCount; ++$j) {
-						if ($tokens[$j] === '{') {
-							$class = $tokens[$i + 2][1];
-						}
-					}
-				}
-			}
-		}
-
-		return $class;
+		include $neededPath;
+		return Configure::read('MustacheCake.currentViewModel');
 	}
 
 /**
@@ -212,15 +165,6 @@ class MustacheView extends View {
 			$exts[] = '.ctp';
 		}
 		return $exts;
-	}
-
-/**
- * Silences errors from token_get_all() in MustacheView::_getViewModelName().
- *
- * @return boolean Always returns true to disable internal error handler.
- */
-	public static function handleTokenError() {
-		return true;
 	}
 
 }
