@@ -128,10 +128,6 @@ class MustacheViewTest extends CakeTestCase {
 		$this->assertContains('.ctp', $exts);
 	}
 
-	public function testTokenErrorSuppress() {
-		$this->assertTrue(TestMustacheView::handleTokenError());
-	}
-
 	public function testGetPartialFileName() {
 		$path = $this->viewPath . 'Elements/test_partial.mustache';
 		$this->assertEquals($path, $this->View->getPartialFileName('test_partial'));
