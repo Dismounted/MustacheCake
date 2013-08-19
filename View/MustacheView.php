@@ -107,7 +107,7 @@ class MustacheView extends View {
 	}
 
 /**
- * Looks through a file to find the name of the first declared class.
+ * Checks for a file accompanying the view telling us what view model to use.
  *
  * @param string $viewFile Filename of the view.
  * @return string Class name, empty if none found.
