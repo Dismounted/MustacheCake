@@ -44,10 +44,6 @@ class TestMustacheController extends Controller {
  */
 class TestMustacheView extends MustacheView {
 
-	public function getViewExt($viewFile) {
-		return $this->_getViewExt($viewFile);
-	}
-
 	public function getRenderData($viewFile, $dataForView) {
 		return $this->_getRenderData($viewFile, $dataForView);
 	}
@@ -103,13 +99,8 @@ class MustacheViewTest extends CakeTestCase {
 		$this->assertInstanceOf('Mustache_Engine', $this->View->mustache);
 	}
 
-	public function testGetViewExt() {
-		$path = $this->viewPath . 'Mustache/index.mustache';
-		$this->assertEquals('.mustache', $this->View->getViewExt($path));
-	}
-
 	public function testGetViewModelNameWithValidFile() {
-		$path = $this->viewPath . 'Mustache/viewmodel.php';
+		$path = $this->viewPath . 'Mustache/viewmodel.mustache';
 		$this->assertEquals('TestViewModel', $this->View->getViewModelName($path));
 	}
 
