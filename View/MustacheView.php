@@ -161,12 +161,15 @@ class MustacheView extends View {
  */
 	protected function _getExtensions() {
 		$exts = array($this->ext);
+
 		if ($this->ext !== '.mustache') {
 			$exts[] = '.mustache';
 		}
+
 		if ($this->ext !== '.ctp') {
 			$exts[] = '.ctp';
 		}
+
 		return $exts;
 	}
 
