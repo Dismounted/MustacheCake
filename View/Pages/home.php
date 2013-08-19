@@ -12,7 +12,7 @@
 
 App::uses('Configure', 'Core');
 App::uses('PagesHomeViewModel', 'MustacheCake.View/Pages');
-Configure::write('MustacheCake.currentViewModel', 'PagesHomeViewModel');
+Configure::write('MustacheCake.useViewModel', 'PagesHomeViewModel');
 
 if (!Configure::read('debug')) {
 	throw new NotFoundException();

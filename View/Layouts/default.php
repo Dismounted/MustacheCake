@@ -12,4 +12,4 @@
 
 App::uses('Configure', 'Core');
 App::uses('DefaultLayoutViewModel', 'MustacheCake.View/Layouts');
-Configure::write('MustacheCake.currentViewModel', 'DefaultLayoutViewModel');
+Configure::write('MustacheCake.useViewModel', 'DefaultLayoutViewModel');

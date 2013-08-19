@@ -113,7 +113,7 @@ class MustacheView extends View {
  * @return string Class name, empty if none found.
  */
 	protected function _getViewModelName($viewFile) {
-		Configure::write('MustacheCake.currentViewModel', '');
+		Configure::write('MustacheCake.useViewModel', '');
 
 		$viewFilePath = pathinfo($viewFile);
 		$neededPath = $viewFilePath['dirname'] . DS . $viewFilePath['filename'] . '.php';
@@ -123,7 +123,10 @@ class MustacheView extends View {
 		}
 
 		include $neededPath;
-		return Configure::read('MustacheCake.currentViewModel');
+		$viewModelName = Configure::read('MustacheCake.useViewModel');
+		Configure::write('MustacheCake.useViewModel', '');
+
+		return $viewModelName;
 	}
 
 /**
