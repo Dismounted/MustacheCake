@@ -105,7 +105,7 @@ class MustacheViewTest extends CakeTestCase {
 	}
 
 	public function testGetViewModelNameWithInvalidFile() {
-		$this->assertEquals('', $this->View->getViewModelName('blah'));
+		$this->assertFalse($this->View->getViewModelName('blah'));
 	}
 
 	public function testGetMustacheCachePathWithValidCache() {

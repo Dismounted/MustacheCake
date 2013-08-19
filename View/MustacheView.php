@@ -99,7 +99,7 @@ class MustacheView extends View {
 	protected function _getRenderData($viewFile, $dataForView) {
 		$viewModelName = $this->_getViewModelName($viewFile);
 
-		if (empty($viewModelName) === true) {
+		if ($viewModelName === false) {
 			return $dataForView;
 		}
 
@@ -110,23 +110,20 @@ class MustacheView extends View {
  * Checks for a file accompanying the view telling us what view model to use.
  *
  * @param string $viewFile Filename of the view.
- * @return string Class name, empty if none found.
+ * @return mixed String with class name, false if none found.
  */
 	protected function _getViewModelName($viewFile) {
-		Configure::write('MustacheCake.useViewModel', '');
+		Configure::write('MustacheCake.useViewModel', false);
 
 		$viewFilePath = pathinfo($viewFile);
 		$neededPath = $viewFilePath['dirname'] . DS . $viewFilePath['filename'] . '.php';
 
 		if (file_exists($neededPath) === false) {
-			return '';
+			return false;
 		}
 
 		include $neededPath;
-		$viewModelName = Configure::read('MustacheCake.useViewModel');
-		Configure::write('MustacheCake.useViewModel', '');
-
-		return $viewModelName;
+		return Configure::read('MustacheCake.useViewModel');
 	}
 
 /**
