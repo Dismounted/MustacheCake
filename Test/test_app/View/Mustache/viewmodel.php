@@ -1,4 +1,4 @@
 <?php
 App::uses('Configure', 'Core');
-App::uses('TestViewModel', 'View/Mustache');
+App::uses('TestViewModel', 'MustacheCake.View/Mustache');
 Configure::write('MustacheCake.useViewModel', 'TestViewModel');
