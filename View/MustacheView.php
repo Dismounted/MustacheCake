@@ -65,7 +65,7 @@ class MustacheView extends View {
  * @return string Rendered output.
  */
 	protected function _evaluate($viewFile, $dataForView) {
-		if ($this->_getViewExt($viewFile) == '.ctp') {
+		if (pathinfo($viewFile, PATHINFO_EXTENSION) == 'ctp') {
 			return parent::_evaluate($viewFile, $dataForView);
 		}
 
