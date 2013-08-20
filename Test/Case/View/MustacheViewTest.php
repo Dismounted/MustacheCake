@@ -84,7 +84,13 @@ class MustacheViewTest extends CakeTestCase {
 		$this->View = new TestMustacheView($this->Controller);
 
 		$this->viewPath = CakePlugin::path('MustacheCake') . 'Test' . DS . 'test_app' . DS . 'View' . DS;
-		App::build(array('View' => array($this->viewPath)), App::RESET);
+		App::build(
+			array(
+				'View' => array($this->viewPath),
+				'View/Mustache' => array($this->viewPath . 'Mustache' . DS)
+			),
+			App::RESET
+		);
 	}
 
 	public function tearDown() {
