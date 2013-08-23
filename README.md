@@ -22,8 +22,8 @@ A Mustache implementation for CakePHP.
 	```php
 	class AppController extends Controller {
 		...
-		public $viewClass = 'MustacheCake.Mustache';
 		public $ext = '.mustache';
+		public $viewClass = 'MustacheCake.Mustache';
 		...
 	}
 	```
@@ -52,9 +52,16 @@ You can also call `View::element()` in `.ctp` templates to include a Mustache pa
 
 ### View Models ###
 
-You can also create a file to accompany the template as a "view model". Place it in the same directory as the template with a `.php` extension (i.e. for `bar.mustache`, create `bar.php`).
+You can also have a class that accompanies the template as a "view model". Firstly, we'll need to tell MustackeCake where to find the corresponding view model. To do this, create a file in the same directory as the template with a `.php` extension (i.e. for `bar.mustache`, create `bar.php`). Inside this file, add the following two lines:
 
-Inside the view model file, create a class that extends `MustacheViewModel`, ensuring to call `App::uses('MustacheViewModel', 'MustacheCake.View');` beforehand. The class can be named whatever you like, as long as it does not conflict with any other class's name.
+```php
+App::uses('SomethingViewModel', 'View/Foo');
+Configure::write('MustacheCake.useViewModel', 'SomethingViewModel');
+```
+
+The first line tells Cake to allow `SomethingViewModel` to be lazy loaded from `app/View/Foo`. The second line tells MustacheCake to use `SomethingViewModel` as the view model for this template. As you can see, you can name and locate view models whatever and wherever you like, and also use the same view model across several templates.
+
+Now create the view model file where you specified above. Inside this file, create a class that extends `MustacheViewModel` (or another view model), ensuring to call `App::uses('MustacheViewModel', 'MustacheCake.View');` beforehand.
 
 From the view model, you can create methods to run whatever logic you need. One common use case would be to call `$this->_View` to access Cake helpers, elements and blocks. A call to `{{ foo }}` in the template will attempt to call the `foo` method in the view model. If the method does not exist, the `foo` view variable will be returned instead.
 
