@@ -10,6 +10,5 @@
  * @license       https://github.com/Dismounted/MustacheCake/blob/master/LICENSE Simplified BSD License
  */
 
-App::uses('Configure', 'Core');
 App::uses('DefaultLayoutViewModel', 'MustacheCake.View/Layouts');
 Configure::write('MustacheCake.useViewModel', 'DefaultLayoutViewModel');

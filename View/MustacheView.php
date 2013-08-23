@@ -11,7 +11,6 @@
  */
 
 App::uses('Cache', 'Cache');
-App::uses('Configure', 'Core');
 App::uses('View', 'View');
 App::uses('MustachePartialsLoader', 'MustacheCake.View');
 

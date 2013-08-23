@@ -10,7 +10,6 @@
  * @license       https://github.com/Dismounted/MustacheCake/blob/master/LICENSE Simplified BSD License
  */
 
-App::uses('Configure', 'Core');
 App::uses('PagesHomeViewModel', 'MustacheCake.View/Pages');
 Configure::write('MustacheCake.useViewModel', 'PagesHomeViewModel');
 
