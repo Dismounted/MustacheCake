@@ -44,10 +44,6 @@ class TestMustacheController extends Controller {
  */
 class TestMustacheView extends MustacheView {
 
-	public function getViewExt($viewFile) {
-		return $this->_getViewExt($viewFile);
-	}
-
 	public function getRenderData($viewFile, $dataForView) {
 		return $this->_getRenderData($viewFile, $dataForView);
 	}
@@ -88,7 +84,13 @@ class MustacheViewTest extends CakeTestCase {
 		$this->View = new TestMustacheView($this->Controller);
 
 		$this->viewPath = CakePlugin::path('MustacheCake') . 'Test' . DS . 'test_app' . DS . 'View' . DS;
-		App::build(array('View' => array($this->viewPath)), App::RESET);
+		App::build(
+			array(
+				'View' => array($this->viewPath),
+				'View/Mustache' => array($this->viewPath . 'Mustache' . DS)
+			),
+			App::RESET
+		);
 	}
 
 	public function tearDown() {
@@ -103,18 +105,13 @@ class MustacheViewTest extends CakeTestCase {
 		$this->assertInstanceOf('Mustache_Engine', $this->View->mustache);
 	}
 
-	public function testGetViewExt() {
-		$path = $this->viewPath . 'Mustache/index.mustache';
-		$this->assertEquals('.mustache', $this->View->getViewExt($path));
-	}
-
 	public function testGetViewModelNameWithValidFile() {
-		$path = $this->viewPath . 'Mustache/viewmodel.php';
+		$path = $this->viewPath . 'Mustache/viewmodel.mustache';
 		$this->assertEquals('TestViewModel', $this->View->getViewModelName($path));
 	}
 
 	public function testGetViewModelNameWithInvalidFile() {
-		$this->assertEquals('', $this->View->getViewModelName('blah'));
+		$this->assertFalse($this->View->getViewModelName('blah'));
 	}
 
 	public function testGetMustacheCachePathWithValidCache() {
@@ -135,10 +132,6 @@ class MustacheViewTest extends CakeTestCase {
 		$this->assertInternalType('array', $exts);
 		$this->assertContains('.mustache', $exts);
 		$this->assertContains('.ctp', $exts);
-	}
-
-	public function testTokenErrorSuppress() {
-		$this->assertTrue(TestMustacheView::handleTokenError());
 	}
 
 	public function testGetPartialFileName() {

@@ -1,14 +1,3 @@
 <?php
-App::uses('MustacheViewModel', 'MustacheCake.View');
-
-class TestViewModel extends MustacheViewModel {
-
-	public function getView() {
-		return $this->_View;
-	}
-
-	public function greeting() {
-		return 'Hello';
-	}
-
-}
+App::uses('TestViewModel', 'View/Mustache');
+Configure::write('MustacheCake.useViewModel', 'TestViewModel');
