@@ -4,7 +4,9 @@ A Mustache plugin for the CakePHP framework.
 
 ## Requirements ##
 
-* CakePHP 2.x (Currently unit tested on latest tags from 2.1, 2.2, and 2.3 branches.)
+* CakePHP 2.x
+
+*Currently unit tested on latest tags from 2.1, 2.2, 2.3 and 2.4 branches.*
 
 ## Installation ##
 
