@@ -23,150 +23,191 @@ App::uses('MustachePartialsLoader', 'MustacheCake.View');
  */
 class MustacheView extends View {
 
-/**
- * File extension. Overrides Cake default. Need to also override in controller!
- *
- * @var string
- */
-	public $ext = '.mustache';
+  /**
+   * File extension. Overrides Cake default. Need to also override in controller!
+   *
+   * @var string
+   */
+  public $ext = '.mustache';
 
-/**
- * An instance of the Mustache engine.
- *
- * @var Mustache_Engine
- */
-	public $mustache;
+  public $renderFromString = false;
 
-/**
- * Constructor.
- *
- * @param Controller $controller A controller object to pull View::_passedVars from.
- */
-	public function __construct(Controller $controller = null) {
-		parent::__construct($controller);
+  /**
+   * An instance of the Mustache engine.
+   *
+   * @var Mustache_Engine
+   */
+  public $mustache;
 
-		if (class_exists('Mustache_Autoloader', false) === false) {
-			App::import('Vendor', 'MustacheCake.Mustache_Autoloader', array('file' => 'Mustache' . DS . 'src' . DS . 'Mustache' . DS . 'Autoloader.php'));
-			Mustache_Autoloader::register();
-		}
+  /**
+   * Constructor.
+   *
+   * @param Controller $controller A controller object to pull View::_passedVars from.
+   */
+  public function __construct(Controller $controller = null) {
+    parent::__construct($controller);
 
-		$this->mustache = new Mustache_Engine(array(
-			'cache' => $this->_getMustacheCachePath(),
-			'partials_loader' => new MustachePartialsLoader($this)
-		));
-	}
+    if (class_exists('Mustache_Autoloader', false) === false) {
+      App::import('Vendor', 'MustacheCake.Mustache_Autoloader', array('file' => 'Mustache' . DS . 'src' . DS . 'Mustache' . DS . 'Autoloader.php'));
+      Mustache_Autoloader::register();
+    }
 
-/**
- * Override to evaluate template through Mustache. Falls back on ".ctp" templates.
- *
- * @param string $viewFile Filename of the view.
- * @param array $dataForView Data to include in rendered view.
- * @return string Rendered output.
- */
-	protected function _evaluate($viewFile, $dataForView) {
-		if (pathinfo($viewFile, PATHINFO_EXTENSION) == 'ctp') {
-			return parent::_evaluate($viewFile, $dataForView);
-		}
+    $this->mustache = new Mustache_Engine(array(
+      'cache' => $this->_getMustacheCachePath(),
+      'partials_loader' => new MustachePartialsLoader($this)
+    ));
+  }
 
-		$this->__viewFile = $viewFile;
+  /**
+   * override render as well
+   * @param null $view
+   * @param null $layout
+   * @return null|string|void
+   */
 
-		$template = $this->_getTemplateAsString($viewFile);
-		$renderData = $this->_getRenderData($viewFile, $dataForView);
-		$rendered = $this->mustache->render($template, $renderData);
+  public function render($view = null, $layout = null) {
+    if ($this->hasRendered) {
+      return;
+    }
 
-		unset($this->__viewFile);
-		return $rendered;
-	}
+    if (!$this->renderFromString) {
+      return parent::render($view, $layout);
+    }
 
-/**
- * Grab the template as a string.
- *
- * @param string $viewFile Filename of the view.
- * @return string Template before output.
- */
-	protected function _getTemplateAsString($viewFile) {
-		return file_get_contents($viewFile);
-	}
+    $viewFileName = false;
 
-/**
- * Grab the view model associated with the view, if it exists.
- *
- * @param string $viewFile Filename of the view.
- * @param array $dataForView Data to include in rendered view.
- * @return mixed Return a MustacheViewModel object, or hand back untouched array.
- */
-	protected function _getRenderData($viewFile, $dataForView) {
-		$viewModelName = $this->_getViewModelName($viewFile);
+    $this->_currentType = self::TYPE_VIEW;
+    $this->getEventManager()->dispatch(new CakeEvent('View.beforeRender', $this, array($viewFileName)));
+    $this->Blocks->set('content', $this->_render(false));
+    $this->getEventManager()->dispatch(new CakeEvent('View.afterRender', $this, array($viewFileName)));
 
-		if ($viewModelName === false) {
-			return $dataForView;
-		}
+    if ($layout === null) {
+      $layout = $this->layout;
+    }
+    if ($layout && $this->autoLayout) {
+      $this->Blocks->set('content', $this->renderLayout('', $layout));
+    }
+    $this->hasRendered = true;
+    return $this->Blocks->get('content');
+  }
 
-		return new $viewModelName($this, $dataForView);
-	}
+  /**
+   * Override to evaluate template through Mustache. Falls back on ".ctp" templates.
+   *
+   * @param string $viewFile Filename of the view.
+   * @param array $dataForView Data to include in rendered view.
+   * @return string Rendered output.
+   */
+  protected function _evaluate($viewFile, $dataForView) {
 
-/**
- * Checks for a file accompanying the view telling us what view model to use.
- *
- * @param string $viewFile Filename of the view.
- * @return mixed String with class name, false if none found.
- */
-	protected function _getViewModelName($viewFile) {
-		Configure::write('MustacheCake.useViewModel', false);
 
-		$viewFilePath = pathinfo($viewFile);
-		$neededPath = $viewFilePath['dirname'] . DS . $viewFilePath['filename'] . '.php';
+    if (pathinfo($viewFile, PATHINFO_EXTENSION) == 'ctp') {
+      return parent::_evaluate($viewFile, $dataForView);
+    }
 
-		if (file_exists($neededPath) === false) {
-			return false;
-		}
+    $this->__viewFile = $viewFile;
 
-		include $neededPath;
-		return Configure::read('MustacheCake.useViewModel');
-	}
+    $template = $this->_getTemplateAsString($viewFile);
+    $renderData = $this->_getRenderData($viewFile, $dataForView);
+    $rendered = $this->mustache->render($template, $renderData);
 
-/**
- * Be good and pass on an element filename to the partials loader.
- *
- * @param string $name The name of the element to find.
- * @return mixed Either a string to the element filename or false when one can't be found.
- */
-	public function getPartialFileName($name) {
-		return $this->_getElementFilename($name);
-	}
+    unset($this->__viewFile);
+    return $rendered;
+  }
 
-/**
- * If Cake is using FileEngine, let's hop on!
- *
- * @return mixed The cache path, null if not applicable.
- */
-	protected function _getMustacheCachePath() {
-		$settings = Cache::settings();
 
-		if (isset($settings['engine']) === true && $settings['engine'] == 'File') {
-			return $settings['path'] . DS . 'mustache';
-		}
+  /**
+   * Grab the template as a string.
+   *
+   * @param string $viewFile Filename of the view.
+   * @return string Template before output.
+   */
+  protected function _getTemplateAsString($viewFile) {
+    if ($this->renderFromString) {
+      return $this->view;
+    }
+    return file_get_contents($viewFile);
+  }
 
-		return null;
-	}
+  /**
+   * Grab the view model associated with the view, if it exists.
+   *
+   * @param string $viewFile Filename of the view.
+   * @param array $dataForView Data to include in rendered view.
+   * @return mixed Return a MustacheViewModel object, or hand back untouched array.
+   */
+  protected function _getRenderData($viewFile, $dataForView) {
+    $viewModelName = $this->_getViewModelName($viewFile);
 
-/**
- * Get the extensions that view files can use. Override to add ".mustache" into the stack.
- *
- * @return array Array of extensions view files use.
- */
-	protected function _getExtensions() {
-		$exts = array($this->ext);
+    if ($viewModelName === false) {
+      return $dataForView;
+    }
 
-		if ($this->ext !== '.mustache') {
-			$exts[] = '.mustache';
-		}
+    return new $viewModelName($this, $dataForView);
+  }
 
-		if ($this->ext !== '.ctp') {
-			$exts[] = '.ctp';
-		}
+  /**
+   * Checks for a file accompanying the view telling us what view model to use.
+   *
+   * @param string $viewFile Filename of the view.
+   * @return mixed String with class name, false if none found.
+   */
+  protected function _getViewModelName($viewFile) {
+    Configure::write('MustacheCake.useViewModel', false);
 
-		return $exts;
-	}
+    $viewFilePath = pathinfo($viewFile);
+    $neededPath = $viewFilePath['dirname'] . DS . $viewFilePath['filename'] . '.php';
+
+    if (file_exists($neededPath) === false) {
+      return false;
+    }
+
+    include $neededPath;
+    return Configure::read('MustacheCake.useViewModel');
+  }
+
+  /**
+   * Be good and pass on an element filename to the partials loader.
+   *
+   * @param string $name The name of the element to find.
+   * @return mixed Either a string to the element filename or false when one can't be found.
+   */
+  public function getPartialFileName($name) {
+    return $this->_getElementFilename($name);
+  }
+
+  /**
+   * If Cake is using FileEngine, let's hop on!
+   *
+   * @return mixed The cache path, null if not applicable.
+   */
+  protected function _getMustacheCachePath() {
+    $settings = Cache::settings();
+
+    if (isset($settings['engine']) === true && $settings['engine'] == 'File') {
+      return $settings['path'] . DS . 'mustache';
+    }
+
+    return null;
+  }
+
+  /**
+   * Get the extensions that view files can use. Override to add ".mustache" into the stack.
+   *
+   * @return array Array of extensions view files use.
+   */
+  protected function _getExtensions() {
+    $exts = array($this->ext);
+
+    if ($this->ext !== '.mustache') {
+      $exts[] = '.mustache';
+    }
+
+    if ($this->ext !== '.ctp') {
+      $exts[] = '.ctp';
+    }
+
+    return $exts;
+  }
 
 }
