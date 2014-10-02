@@ -13,12 +13,20 @@ matrix:
   include:
     - php: 5.5
       env: CAKE_VERSION=2.3.10
+      env: PHPCS=1
     - php: 5.5
       env: CAKE_VERSION=2.2.9
+      env: PHPCS=1
     - php: 5.5
       env: CAKE_VERSION=2.1.5
+      env: PHPCS=1
     - php: 5.5
       env: PHPCS=1
+    - php: 5.3
+      env: PHPCS=1
+    - php: 5.4
+      env: PHPCS=1
+    - php: 5.3
       git:
         submodules: false
 
@@ -33,8 +41,10 @@ before_script:
       cp -R ../MustacheCake app/Plugin/MustacheCake;
       chmod -R 777 app/tmp;
       fi"
-  - sh -c "composer global require 'phpunit/phpunit=3.7.33';"
-  - sh -c "ln -s ~/.composer/vendor/phpunit/phpunit/PHPUnit ../cakephp/vendors/PHPUnit;"
+  - sh -c "if [ '$PHPCS' != '1' ]; then
+      composer global require 'phpunit/phpunit=3.7.33';"
+      ln -s ~/.composer/vendor/phpunit/phpunit/PHPUnit ../cakephp/vendors/PHPUnit;
+      fi"
   - sh -c "if [ '$PHPCS' = '1' ]; then
       pear channel-discover pear.cakephp.org;
       pear install --alldeps cakephp/CakePHP_CodeSniffer;
