@@ -12,14 +12,11 @@ env:
 matrix:
   include:
     - php: 5.5
-      env: CAKE_VERSION=2.3.10
-      env: PHPCS=1
+      env: CAKE_VERSION=2.3.10 PHPCS=1
     - php: 5.5
-      env: CAKE_VERSION=2.2.9
-      env: PHPCS=1
+      env: CAKE_VERSION=2.2.9 PHPCS=1
     - php: 5.5
-      env: CAKE_VERSION=2.1.5
-      env: PHPCS=1
+      env: CAKE_VERSION=2.1.5 PHPCS=1
     - php: 5.5
       env: PHPCS=1
     - php: 5.3
@@ -42,7 +39,7 @@ before_script:
       chmod -R 777 app/tmp;
       fi"
   - sh -c "if [ '$PHPCS' != '1' ]; then
-      composer global require 'phpunit/phpunit=3.7.33';"
+      composer global require 'phpunit/phpunit=3.7.33';
       ln -s ~/.composer/vendor/phpunit/phpunit/PHPUnit ../cakephp/vendors/PHPUnit;
       fi"
   - sh -c "if [ '$PHPCS' = '1' ]; then
