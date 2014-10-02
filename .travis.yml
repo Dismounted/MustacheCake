@@ -53,4 +53,4 @@ script:
       cd ../cakephp/app;
       ./Console/cake test MustacheCake AllTests --stderr;
       fi"
-  - sh -c "if [ '$PHPCS' = '1' ]; then phpcs -p --extensions=php --standard=CakePHP .; fi"
+  - sh -c "if [ '$PHPCS' = '1' ]; then phpcs -p --extensions=php --standard=CakePHP --ignore=Vendor .; fi"
