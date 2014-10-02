@@ -65,11 +65,12 @@ class MustacheView extends View {
 
 	/**
 		* override render as well
-		* @param null $view
-		* @param null $layout
-		* @return null|string|void
+		*
+		* @param string $view Name of view file to use or Mustache Template String
+		* @param string $layout Layout to use
+		* @return null|string Rendered content or null if content already rendered and returned earlier.
+		* @throws CakeException If there is an error in the view.
 		*/
-
 	public function render($view = null, $layout = null) {
 		if ($this->hasRendered) {
 			return;
@@ -117,7 +118,6 @@ class MustacheView extends View {
 		unset($this->__viewFile);
 		return $rendered;
 	}
-
 
 	/**
 		* Grab the template as a string.
