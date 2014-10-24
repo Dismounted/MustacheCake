@@ -10,7 +10,7 @@
  * @license       https://github.com/Dismounted/MustacheCake/blob/master/LICENSE Simplified BSD License
  */
 
-App::uses('MustacheView', 'View');
+App::uses('MustacheView', 'MustacheCake.View');
 
 /**
  * Mustache string view class.

@@ -13,6 +13,7 @@
 App::uses('Cache', 'Cache');
 App::uses('Controller', 'Controller');
 App::uses('MustacheView', 'MustacheCake.View');
+App::uses('MustacheStringView', 'MustacheCake.View');
 
 /**
  * MustacheCake controller for testing.
@@ -185,6 +186,22 @@ class MustacheViewTest extends CakeTestCase {
 	public function testRenderCtpFallback() {
 		$expected = 'CTP Fallback';
 		$result = $this->View->render('ctp_fallback', false);
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testRenderStringSimple() {
+		$this->View = new MustacheStringView($this->Controller);
+
+		$expected = 'Mustache Index';
+		$result = $this->View->render('Mustache Index', false);
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testRenderStringWithVariables() {
+		$this->View = new MustacheStringView($this->Controller);
+
+		$expected = 'Hello world!';
+		$result = $this->View->render('Hello {{ planet }}!', false);
 		$this->assertEquals($expected, $result);
 	}
 
