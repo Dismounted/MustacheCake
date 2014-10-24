@@ -20,7 +20,7 @@ App::uses('MustacheViewModel', 'MustacheCake.View');
 class DefaultLayoutViewModel extends MustacheViewModel {
 
 /**
- * init
+ * Initialise view model.
  *
  * @return void
  */
@@ -29,7 +29,7 @@ class DefaultLayoutViewModel extends MustacheViewModel {
 	}
 
 /**
- * renders page charset
+ * Returns page charset.
  *
  * @return string
  */
@@ -38,70 +38,70 @@ class DefaultLayoutViewModel extends MustacheViewModel {
 	}
 
 /**
- * renders meta icon
+ * Returns favicon.
  *
- * @return string icon code
+ * @return string
  */
 	public function icon() {
 		return $this->_View->Html->meta('icon');
 	}
 
 /**
- * renders css
+ * Returns CakePHP default CSS.
  *
- * @return string css code
+ * @return string
  */
 	public function cssCakeGeneric() {
 		return $this->_View->Html->css('cake.generic');
 	}
 
 /**
- * renders meta
+ * Returns page metadata.
  *
- * @return string meta tag
+ * @return string
  */
 	public function meta() {
 		return $this->_View->fetch('meta');
 	}
 
 /**
- * renders css
+ * Returns additional CSS.
  *
- * @return string CSS code
+ * @return string
  */
 	public function css() {
 		return $this->_View->fetch('css');
 	}
 
 /**
- * renders java script
+ * Returns Javascript.
  *
- * @return string java script code
+ * @return string
  */
 	public function script() {
 		return $this->_View->fetch('script');
 	}
 
 /**
- * renders link to cake
+ * Returns CakePHP website link.
  *
- * @return string cake link
+ * @return string
  */
 	public function cakeLink() {
 		return $this->_View->Html->link($this->cakeDescription, 'http://cakephp.org');
 	}
 
 /**
- * renders flash messages
+ * Returns SessionComponent flash messages.
  *
- * @return string html code
+ * @return string
  */
 	public function sessionFlash() {
 		return $this->_View->Session->flash();
 	}
 
 /**
- * renders content
+ * Returns page content.
  *
  * @return string
  */
@@ -110,9 +110,9 @@ class DefaultLayoutViewModel extends MustacheViewModel {
 	}
 
 /**
- * renders cake image
+ * Returns CakePHP image.
  *
- * @return string html code
+ * @return string
  */
 	public function cakeImage() {
 		return $this->_View->Html->link(
@@ -123,9 +123,9 @@ class DefaultLayoutViewModel extends MustacheViewModel {
 	}
 
 /**
- * renders sql dump
+ * Returns SQL dump for debugging.
  *
- * @return string html code
+ * @return string
  */
 	public function sqlDump() {
 		return $this->_View->element('sql_dump');

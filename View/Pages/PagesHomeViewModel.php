@@ -21,16 +21,16 @@ App::uses('Debugger', 'Utility');
 class PagesHomeViewModel extends MustacheViewModel {
 
 /**
- * Dummy description
+ * Returns translated main heading.
  *
- * @return translated
+ * @return string
  */
 	public function mainHeading() {
 		return __d('cake_dev', 'Release Notes for CakePHP %s.', Configure::version());
 	}
 
 /**
- * Dummy description
+ * Returns CakePHP version.
  *
  * @return string
  */
@@ -39,16 +39,16 @@ class PagesHomeViewModel extends MustacheViewModel {
 	}
 
 /**
- * Dummy description
+ * Returns translated change log text.
  *
- * @return translated
+ * @return string
  */
 	public function readChangelogText() {
 		return __d('cake_dev', 'Read the changelog');
 	}
 
 /**
- * Dummy description
+ * Checks if security keys have been changed from default values.
  *
  * @return void
  */
@@ -59,16 +59,16 @@ class PagesHomeViewModel extends MustacheViewModel {
 	}
 
 /**
- * Dummy description
+ * Returns translated URL rewriting warning.
  *
- * @return translated
+ * @return string
  */
 	public function urlRewritingText() {
 		return __d('cake_dev', 'URL rewriting is not properly configured on your server.');
 	}
 
 /**
- * Dummy description
+ * Runs all the tests.
  *
  * @return array
  */
@@ -95,7 +95,7 @@ class PagesHomeViewModel extends MustacheViewModel {
 	}
 
 /**
- * Dummy description
+ * Checks the current PHP version.
  *
  * @return array
  */
@@ -108,7 +108,7 @@ class PagesHomeViewModel extends MustacheViewModel {
 	}
 
 /**
- * Dummy description
+ * Checks the tmp directory is writable.
  *
  * @return array
  */
@@ -121,7 +121,7 @@ class PagesHomeViewModel extends MustacheViewModel {
 	}
 
 /**
- * Dummy description
+ * Checks cache is working.
  *
  * @return array
  */
@@ -135,7 +135,7 @@ class PagesHomeViewModel extends MustacheViewModel {
 	}
 
 /**
- * Dummy description
+ * Checks database configuration.
  *
  * @return array
  */
@@ -153,7 +153,7 @@ class PagesHomeViewModel extends MustacheViewModel {
 	}
 
 /**
- * Dummy description
+ * Checks database connection.
  *
  * @return array
  */
@@ -185,7 +185,7 @@ class PagesHomeViewModel extends MustacheViewModel {
 	}
 
 /**
- * Dummy description
+ * Checks PCRE Unicode support.
  *
  * @return array
  */
@@ -200,7 +200,7 @@ class PagesHomeViewModel extends MustacheViewModel {
 	}
 
 /**
- * Dummy description
+ * Checks if DebugKit is installed.
  *
  * @return array
  */
@@ -216,18 +216,18 @@ class PagesHomeViewModel extends MustacheViewModel {
 	}
 
 /**
- * Dummy description
+ * Returns translated editing page heading.
  *
- * @return translated
+ * @return string
  */
 	public function editingPageHeading() {
 		return __d('cake_dev', 'Editing this Page');
 	}
 
 /**
- * Dummy description
+ * Returns translated editing page text.
  *
- * @return translated
+ * @return string
  */
 	public function editingPageText() {
 		return __d('cake_dev', 'To change the content of this page, edit: APP/View/Pages/home.ctp.<br />
@@ -236,16 +236,16 @@ You can also add some CSS styles for your pages at: APP/webroot/css.');
 	}
 
 /**
- * Dummy description
+ * Returns translated getting started heading.
  *
- * @return translated
+ * @return string
  */
 	public function gettingStartedHeading() {
 		return __d('cake_dev', 'Getting Started');
 	}
 
 /**
- * Dummy description
+ * Returns documentation link.
  *
  * @return string
  */
@@ -258,7 +258,7 @@ You can also add some CSS styles for your pages at: APP/webroot/css.');
 	}
 
 /**
- * Dummy description
+ * Returns blog tutorial link.
  *
  * @return string
  */
@@ -271,16 +271,16 @@ You can also add some CSS styles for your pages at: APP/webroot/css.');
 	}
 
 /**
- * Dummy description
+ * Returns translated official plugins heading.
  *
- * @return translated
+ * @return string
  */
 	public function officialPluginsHeading() {
 		return __d('cake_dev', 'Official Plugins');
 	}
 
 /**
- * Dummy description
+ * Returns DebugKit link.
  *
  * @return string
  */
@@ -291,7 +291,7 @@ You can also add some CSS styles for your pages at: APP/webroot/css.');
 	}
 
 /**
- * Dummy description
+ * Returns localisation link.
  *
  * @return string
  */
@@ -302,34 +302,34 @@ You can also add some CSS styles for your pages at: APP/webroot/css.');
 	}
 
 /**
- * Dummy description
+ * Returns translated more about Cake heading.
  *
- * @return translated
+ * @return string
  */
 	public function moreAboutCakeHeading() {
 		return __d('cake_dev', 'More about Cake');
 	}
 
 /**
- * Dummy description
+ * Returns translated Cake description.
  *
- * @return translated
+ * @return string
  */
 	public function cakeDescription() {
 		return __d('cake_dev', 'CakePHP is a rapid development framework for PHP which uses commonly known design patterns like Active Record, Association Data Mapping, Front Controller and MVC.');
 	}
 
 /**
- * Dummy description
+ * Returns translated goal.
  *
- * @return translated
+ * @return string
  */
 	public function cakeGoal() {
 		return __d('cake_dev', 'Our primary goal is to provide a structured framework that enables PHP users at all levels to rapidly develop robust web applications, without any loss to flexibility.');
 	}
 
 /**
- * Dummy description
+ * Returns extra links.
  *
  * @return array
  */
