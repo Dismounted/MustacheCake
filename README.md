@@ -6,7 +6,7 @@ A Mustache plugin for the CakePHP framework.
 
 * CakePHP 2.x
 
-*Currently unit tested on latest tags from 2.1, 2.2, 2.3, 2.4 and 2.5 branches.*
+*Currently unit tested on latest tags from 2.4 and 2.5 branches.*
 
 ## Installation ##
 
