@@ -1,77 +1,77 @@
 <?php
 /**
-	* MustacheCake
-	*
-	* A Mustache implementation for CakePHP.
-	*
-	* @copyright     Copyright (c) Hanson Wong
-	* @link          https://github.com/Dismounted/MustacheCake
-	* @package       MustacheCake.View.Pages
-	* @license       https://github.com/Dismounted/MustacheCake/blob/master/LICENSE Simplified BSD License
-	*/
+ * MustacheCake
+ *
+ * A Mustache implementation for CakePHP.
+ *
+ * @copyright     Copyright (c) Hanson Wong
+ * @link          https://github.com/Dismounted/MustacheCake
+ * @package       MustacheCake.View.Pages
+ * @license       https://github.com/Dismounted/MustacheCake/blob/master/LICENSE Simplified BSD License
+ */
 
 App::uses('MustacheViewModel', 'MustacheCake.View');
 App::uses('Debugger', 'Utility');
 
 /**
-	* Cake default home view model.
-	*
-	* @package       MustacheCake.View.Pages
-	*/
+ * Cake default home view model.
+ *
+ * @package       MustacheCake.View.Pages
+ */
 class PagesHomeViewModel extends MustacheViewModel {
 
-	/**
-		* Dummy description
-		*
-		* @return translated
-		*/
+/**
+ * Dummy description
+ *
+ * @return translated
+ */
 	public function mainHeading() {
 		return __d('cake_dev', 'Release Notes for CakePHP %s.', Configure::version());
 	}
 
-	/**
-		* Dummy description
-		*
-		* @return string
-		*/
+/**
+ * Dummy description
+ *
+ * @return string
+ */
 	public function version() {
 		return Configure::version();
 	}
 
-	/**
-		* Dummy description
-		*
-		* @return translated
-		*/
+/**
+ * Dummy description
+ *
+ * @return translated
+ */
 	public function readChangelogText() {
 		return __d('cake_dev', 'Read the changelog');
 	}
 
-	/**
-		* Dummy description
-		*
-		* @return void
-		*/
+/**
+ * Dummy description
+ *
+ * @return void
+ */
 	public function checkSecurityKeys() {
 		if (Configure::read('debug') > 0) {
 			Debugger::checkSecurityKeys();
 		}
 	}
 
-	/**
-		* Dummy description
-		*
-		* @return translated
-		*/
+/**
+ * Dummy description
+ *
+ * @return translated
+ */
 	public function urlRewritingText() {
 		return __d('cake_dev', 'URL rewriting is not properly configured on your server.');
 	}
 
-	/**
-		* Dummy description
-		*
-		* @return array
-		*/
+/**
+ * Dummy description
+ *
+ * @return array
+ */
 	public function runTests() {
 		$tests = array(
 			'PhpVersion',
@@ -94,11 +94,11 @@ class PagesHomeViewModel extends MustacheViewModel {
 		return $output;
 	}
 
-	/**
-		* Dummy description
-		*
-		* @return array
-		*/
+/**
+ * Dummy description
+ *
+ * @return array
+ */
 	protected function _checkPhpVersion() {
 		if (version_compare(PHP_VERSION, '5.2.8', '>=')) {
 			return array('extraClass' => ' success', 'message' => __d('cake_dev', 'Your version of PHP is 5.2.8 or higher.'));
@@ -107,11 +107,11 @@ class PagesHomeViewModel extends MustacheViewModel {
 		}
 	}
 
-	/**
-		* Dummy description
-		*
-		* @return array
-		*/
+/**
+ * Dummy description
+ *
+ * @return array
+ */
 	protected function _checkTmpDirectory() {
 		if (is_writable(TMP)) {
 			return array('extraClass' => ' success', 'message' => __d('cake_dev', 'Your tmp directory is writable.'));
@@ -120,11 +120,11 @@ class PagesHomeViewModel extends MustacheViewModel {
 		}
 	}
 
-	/**
-		* Dummy description
-		*
-		* @return array
-		*/
+/**
+ * Dummy description
+ *
+ * @return array
+ */
 	protected function _checkCache() {
 		$settings = Cache::settings();
 		if (!empty($settings)) {
@@ -135,11 +135,11 @@ class PagesHomeViewModel extends MustacheViewModel {
 		}
 	}
 
-	/**
-		* Dummy description
-		*
-		* @return array
-		*/
+/**
+ * Dummy description
+ *
+ * @return array
+ */
 	protected function _checkDbConfig() {
 		$this->filePresent = null;
 		if (file_exists(APP . 'Config' . DS . 'database.php')) {
@@ -154,11 +154,11 @@ class PagesHomeViewModel extends MustacheViewModel {
 		}
 	}
 
-	/**
-		* Dummy description
-		*
-		* @return array
-		*/
+/**
+ * Dummy description
+ *
+ * @return array
+ */
 	protected function _checkDbConnection() {
 		if (isset($this->filePresent)) {
 			App::uses('ConnectionManager', 'Model');
@@ -186,11 +186,11 @@ class PagesHomeViewModel extends MustacheViewModel {
 		}
 	}
 
-	/**
-		* Dummy description
-		*
-		* @return array
-		*/
+/**
+ * Dummy description
+ *
+ * @return array
+ */
 	protected function _checkPcreUnicode() {
 		App::uses('Validation', 'Utility');
 		if (!Validation::alphaNumeric('cakephp')) {
@@ -201,11 +201,11 @@ class PagesHomeViewModel extends MustacheViewModel {
 		}
 	}
 
-	/**
-		* Dummy description
-		*
-		* @return array
-		*/
+/**
+ * Dummy description
+ *
+ * @return array
+ */
 	protected function _checkDebugKit() {
 		if (CakePlugin::loaded('DebugKit')) {
 			return array('extraClass' => ' success', 'message' => __d('cake_dev', 'DebugKit plugin is present'));
@@ -217,40 +217,40 @@ class PagesHomeViewModel extends MustacheViewModel {
 		}
 	}
 
-	/**
-		* Dummy description
-		*
-		* @return translated
-		*/
+/**
+ * Dummy description
+ *
+ * @return translated
+ */
 	public function editingPageHeading() {
 		return __d('cake_dev', 'Editing this Page');
 	}
 
-	/**
-		* Dummy description
-		*
-		* @return translated
-		*/
+/**
+ * Dummy description
+ *
+ * @return translated
+ */
 	public function editingPageText() {
 		return __d('cake_dev', 'To change the content of this page, edit: APP/View/Pages/home.ctp.<br />
 To change its layout, edit: APP/View/Layouts/default.ctp.<br />
 You can also add some CSS styles for your pages at: APP/webroot/css.');
 	}
 
-	/**
-		* Dummy description
-		*
-		* @return translated
-		*/
+/**
+ * Dummy description
+ *
+ * @return translated
+ */
 	public function gettingStartedHeading() {
 		return __d('cake_dev', 'Getting Started');
 	}
 
-	/**
-		* Dummy description
-		*
-		* @return string
-		*/
+/**
+ * Dummy description
+ *
+ * @return string
+ */
 	public function cakeDocsLink() {
 		return $this->_View->Html->link(
 			sprintf('<strong>%s</strong> %s', __d('cake_dev', 'New'), __d('cake_dev', 'CakePHP 2.0 Docs')),
@@ -259,11 +259,11 @@ You can also add some CSS styles for your pages at: APP/webroot/css.');
 		);
 	}
 
-	/**
-		* Dummy description
-		*
-		* @return string
-		*/
+/**
+ * Dummy description
+ *
+ * @return string
+ */
 	public function blogTutorialLink() {
 		return $this->_View->Html->link(
 			__d('cake_dev', 'The 15 min Blog Tutorial'),
@@ -272,69 +272,69 @@ You can also add some CSS styles for your pages at: APP/webroot/css.');
 		);
 	}
 
-	/**
-		* Dummy description
-		*
-		* @return translated
-		*/
+/**
+ * Dummy description
+ *
+ * @return translated
+ */
 	public function officialPluginsHeading() {
 		return __d('cake_dev', 'Official Plugins');
 	}
 
-	/**
-		* Dummy description
-		*
-		* @return string
-		*/
+/**
+ * Dummy description
+ *
+ * @return string
+ */
 	public function debugKitLink() {
 		return $this->_View->Html->link('DebugKit', 'https://github.com/cakephp/debug_kit') .
 		': ' .
 		__d('cake_dev', 'provides a debugging toolbar and enhanced debugging tools for CakePHP applications.');
 	}
 
-	/**
-		* Dummy description
-		*
-		* @return string
-		*/
+/**
+ * Dummy description
+ *
+ * @return string
+ */
 	public function localizedLink() {
 		return $this->_View->Html->link('Localized', 'https://github.com/cakephp/localized') .
 		': ' .
 		__d('cake_dev', 'contains various localized validation classes and translations for specific countries');
 	}
 
-	/**
-		* Dummy description
-		*
-		* @return translated
-		*/
+/**
+ * Dummy description
+ *
+ * @return translated
+ */
 	public function moreAboutCakeHeading() {
 		return __d('cake_dev', 'More about Cake');
 	}
 
-	/**
-		* Dummy description
-		*
-		* @return translated
-		*/
+/**
+ * Dummy description
+ *
+ * @return translated
+ */
 	public function cakeDescription() {
 		return __d('cake_dev', 'CakePHP is a rapid development framework for PHP which uses commonly known design patterns like Active Record, Association Data Mapping, Front Controller and MVC.');
 	}
 
-	/**
-		* Dummy description
-		*
-		* @return translated
-		*/
+/**
+ * Dummy description
+ *
+ * @return translated
+ */
 	public function cakeGoal() {
 		return __d('cake_dev', 'Our primary goal is to provide a structured framework that enables PHP users at all levels to rapidly develop robust web applications, without any loss to flexibility.');
 	}
 
-	/**
-		* Dummy description
-		*
-		* @return array
-		*/
+/**
+ * Dummy description
+ *
+ * @return array
+ */
 	public function extraLinks() {
 		return array(
 			array(

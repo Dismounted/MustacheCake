@@ -43,7 +43,7 @@ class MustachePartialsLoader implements Mustache_Loader {
 /**
  * Load a Template by name. Returning empty string on failure matches Cake behaviour.
  *
- * @param string $name template name
+ * @param string $name Filename of the partial.
  * @return string Mustache template source.
  */
 	public function load($name) {
