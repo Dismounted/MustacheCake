@@ -31,7 +31,7 @@ class MustacheStringView extends MustacheView {
  * @return string|null
  */
 	public function render($view = null, $layout = null) {
-		if (empty($view) === true) {
+		if ($this->hasRendered || empty($view) === true) {
 			return;
 		}
 
@@ -40,7 +40,14 @@ class MustacheStringView extends MustacheView {
 		$this->Blocks->set('content', $this->mustache->render($view, $this->viewVars));
 		$this->getEventManager()->dispatch(new CakeEvent('View.afterRender', $this, array('MustacheStringView', $view)));
 
-		return parent::render(false, $layout);
+		if ($layout === null) {
+			$layout = $this->layout;
+		}
+		if ($layout && $this->autoLayout) {
+			$this->Blocks->set('content', $this->renderLayout('', $layout));
+		}
+		$this->hasRendered = true;
+		return $this->Blocks->get('content');
 	}
 
 }
