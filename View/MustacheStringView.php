@@ -24,7 +24,7 @@ class MustacheStringView extends MustacheView {
 /**
  * Renders view from string.
  *
- *Take note that this bypasses many routines - e.g. View::_render().
+ * Take note that this bypasses many routines - e.g. View::_render().
  *
  * @param string $view Mustache string to render.
  * @param string $layout Layout to use.
