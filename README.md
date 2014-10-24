@@ -71,6 +71,17 @@ From the view model, you can create methods to run whatever logic you need. One 
 
 As you can see, view models can become a very useful and powerful tool, allowing you to keep your templates "clean" and your models free of presentation logic. However, it is not necessary to create a view model. If one does not exist, MustacheCake will simply use view variables set from the controller.
 
+### String Templates ###
+
+Strings can also be used as a template. Simply use `MustacheStringView` instead. Here's a simple example:
+
+```php
+$View = new MustacheStringView();
+$View->layout = false;
+$View->set('planet', 'world');
+$out = $View->render('Hello {{ planet }}!');
+```
+
 ## Confused? ##
 
 Sorry! I've tried to make it as straightforward as possible, by providing a light "glue" between CakePHP and Mustache. Once you get the hang of using MustacheCake, it should make a lot of sense.
