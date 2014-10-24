@@ -31,13 +31,6 @@ class MustacheView extends View {
 	public $ext = '.mustache';
 
 /**
- * controls if Mustache template will be rendered from string and not from file
- *
- * @var bool
- */
-	public $renderFromString = false;
-
-/**
  * An instance of the Mustache engine.
  *
  * @var Mustache_Engine
@@ -61,40 +54,6 @@ class MustacheView extends View {
 			'cache' => $this->_getMustacheCachePath(),
 			'partials_loader' => new MustachePartialsLoader($this)
 		));
-	}
-
-/**
- * override render as well
- *
- * @param string $view Name of view file to use or Mustache Template String
- * @param string $layout Layout to use
- * @return null|string Rendered content or null if content already rendered and returned earlier.
- * @throws CakeException If there is an error in the view.
- */
-	public function render($view = null, $layout = null) {
-		if ($this->hasRendered) {
-			return;
-		}
-
-		if (!$this->renderFromString) {
-			return parent::render($view, $layout);
-		}
-
-		$viewFileName = false;
-
-		$this->_currentType = self::TYPE_VIEW;
-		$this->getEventManager()->dispatch(new CakeEvent('View.beforeRender', $this, array($viewFileName)));
-		$this->Blocks->set('content', $this->_render(false));
-		$this->getEventManager()->dispatch(new CakeEvent('View.afterRender', $this, array($viewFileName)));
-
-		if ($layout === null) {
-			$layout = $this->layout;
-		}
-		if ($layout && $this->autoLayout) {
-			$this->Blocks->set('content', $this->renderLayout('', $layout));
-		}
-		$this->hasRendered = true;
-		return $this->Blocks->get('content');
 	}
 
 /**
@@ -126,9 +85,6 @@ class MustacheView extends View {
  * @return string Template before output.
  */
 	protected function _getTemplateAsString($viewFile) {
-		if ($this->renderFromString) {
-			return $this->view;
-		}
 		return file_get_contents($viewFile);
 	}
 
