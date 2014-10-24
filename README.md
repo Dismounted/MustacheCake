@@ -6,7 +6,7 @@ A Mustache plugin for the CakePHP framework.
 
 * CakePHP 2.x
 
-*Currently unit tested on latest tags from 2.1, 2.2, 2.3 and 2.4 branches.*
+*Currently unit tested on latest tags from 2.4 and 2.5 branches.*
 
 ## Installation ##
 
@@ -70,6 +70,17 @@ From the view model, you can create methods to run whatever logic you need. One 
 `MustacheViewModel::_init()` will be run during `MustacheViewModel::__construct()`. Override this method to setup your template (e.g. adding scripts to its view block using `HtmlHelper`).
 
 As you can see, view models can become a very useful and powerful tool, allowing you to keep your templates "clean" and your models free of presentation logic. However, it is not necessary to create a view model. If one does not exist, MustacheCake will simply use view variables set from the controller.
+
+### String Templates ###
+
+Strings can also be used as a template. Simply use `MustacheStringView` instead. Here's a simple example:
+
+```php
+$View = new MustacheStringView();
+$View->layout = false;
+$View->set('planet', 'world');
+$out = $View->render('Hello {{ planet }}!');
+```
 
 ## Confused? ##
 
