@@ -128,8 +128,7 @@ class PagesHomeViewModel extends MustacheViewModel {
 	protected function _checkCache() {
 		$settings = Cache::settings();
 		if (!empty($settings)) {
-			return array('extraClass' => ' success',
-																'message' => __d('cake_dev', 'The %s is being used for core caching. To change the config edit APP/Config/core.php ', '<em>' . $settings['engine'] . 'Engine</em>'));
+			return array('extraClass' => ' success', 'message' => __d('cake_dev', 'The %s is being used for core caching. To change the config edit APP/Config/core.php ', '<em>' . $settings['engine'] . 'Engine</em>'));
 		} else {
 			return array('message' => __d('cake_dev', 'Your cache is NOT working. Please check the settings in APP/Config/core.php'));
 		}
@@ -144,8 +143,7 @@ class PagesHomeViewModel extends MustacheViewModel {
 		$this->filePresent = null;
 		if (file_exists(APP . 'Config' . DS . 'database.php')) {
 			$this->filePresent = true;
-			return array('extraClass' => ' success',
-																'message' => __d('cake_dev', 'Your database configuration file is present.'));
+			return array('extraClass' => ' success', 'message' => __d('cake_dev', 'Your database configuration file is present.'));
 		} else {
 			$message = __d('cake_dev', 'Your database configuration file is NOT present.') .
 				'<br/>' .
@@ -288,8 +286,8 @@ You can also add some CSS styles for your pages at: APP/webroot/css.');
  */
 	public function debugKitLink() {
 		return $this->_View->Html->link('DebugKit', 'https://github.com/cakephp/debug_kit') .
-		': ' .
-		__d('cake_dev', 'provides a debugging toolbar and enhanced debugging tools for CakePHP applications.');
+			': ' .
+			__d('cake_dev', 'provides a debugging toolbar and enhanced debugging tools for CakePHP applications.');
 	}
 
 /**
@@ -299,8 +297,8 @@ You can also add some CSS styles for your pages at: APP/webroot/css.');
  */
 	public function localizedLink() {
 		return $this->_View->Html->link('Localized', 'https://github.com/cakephp/localized') .
-		': ' .
-		__d('cake_dev', 'contains various localized validation classes and translations for specific countries');
+			': ' .
+			__d('cake_dev', 'contains various localized validation classes and translations for specific countries');
 	}
 
 /**
